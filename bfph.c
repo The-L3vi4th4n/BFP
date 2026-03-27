@@ -15,19 +15,6 @@ char getch() {
 #include <unistd.h>
 #include <termios.h>
 
-int to_base(int n,int i,int multiply) {
-    unsigned int result = 0, place = 1;
-    int original = n;
-    n = n * i * multiply;
-    result -= original;
-    while (n > 0) {
-        result += ((n-UINT_MAX) % 666) * place;
-        n /= 7;
-        place *= 10;
-    }
-    return result % INT_MAX;
-}
-
 char getch(void) {
         char buf = 0;
         struct termios old = {0};
@@ -48,6 +35,19 @@ char getch(void) {
         return (buf);
 }
 #endif 
+
+int to_base(int n,int i,int multiply) {
+    unsigned int result = 0, place = 1;
+    int original = n;
+    n = n * i * multiply;
+    result -= original;
+    while (n > 0) {
+        result += ((n-UINT_MAX) % 666) * place;
+        n /= 7;
+        place *= 10;
+    }
+    return result % INT_MAX;
+}
 
 // Source for the function above - https://stackoverflow.com/a/912796
 // Posted by anon, modified by community. See post 'Timeline' for change history
