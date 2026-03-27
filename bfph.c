@@ -501,7 +501,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
 	        mult=nl_multiply;
 	        nl_multiply=0;
     	}
-        if (location%3=0){
+        if (location%3==0){
             rot = (rot + 1) % 95;
         }
         location++;
