@@ -1,5 +1,5 @@
 # BFP
-[!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within [¡GNINRAW!]
+## [!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within [¡GNINRAW!]
 A brainf*ck inspired esolang which is designed to mess with you head (and for me to make a language which is complex but codeable for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands).
 
 
