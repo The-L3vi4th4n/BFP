@@ -13,7 +13,7 @@ compiler with clang/gcc<br>
 STRIP_SIZE with the size you want the strip to be<br>
 MAX_PTR with the maximum amount of pointers you would like<br>
 '"output.bin"' with the file which get's the location of strip[0] in memory<br>
-ver with bfp.c/bfph.c<br><i><b>
+ver with bfp.c/bfph.c<br></i></b>
 name with the name of your application<br>
 
 the lines in italic are optional
