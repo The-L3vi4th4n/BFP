@@ -72,6 +72,7 @@ int to_base(int n,int i,int multiply) {
 int BASE_STRIP = DEFAULT_STRIP;
 int PTR_MAX = DEFAULT_PTR_MAX;
 int digit=0;
+static int rot = 0;
 
 int *rbracket(int *strip, int location, int multiply, int length, char data[]);
 int *sbracket(int *strip, int location, int multiply, int length, char data[]);
@@ -173,7 +174,7 @@ int main(int args, char *argv[]){
     int inputValue = 0;
     
     while(i < length){
-        data[i] = (data[i] + strip[ptr]) % 95 + 32; 
+        data[i] = (data[i] + strip[ptr]) % 95 + rot; 
         if (data[i]==('<'-(unsigned char)(i)+(unsigned char)(multiply))){
             for (int k=0; k<multiply; k++){
             	ptr--;    	
@@ -365,7 +366,7 @@ int main(int args, char *argv[]){
             multiply = rbr_multiply;
             rbr = 0;
         }
-        
+        rot = (rot + 1) % 95;
         i++;
     }
     
@@ -388,7 +389,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
     int separator_hit = 0;
     
     while (location < length) {
-        data[location] = (data[mult%length] + strip[mult%BASE_STRIP]) % 95 + 32;
+        data[location] = (data[mult%length] + strip[mult%BASE_STRIP]) % 95 + rot;
         if (data[location] == (']'-(unsigned char)location-(unsigned char)(mult+multiply))) {
             break;
         } else if (data[location] == ('('-(unsigned char)location-(unsigned char)(mult+multiply))) {
@@ -442,6 +443,9 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
         } else {
             mult = digit;
         }
+        if (location%2==0){
+            rot = (rot + 1) % 95;
+        }
         location++;
     }
     
@@ -468,7 +472,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
     int *nested;
     
     while (location < length) {
-        data[location] = (data[mult%length] + strip[mult%BASE_STRIP]) % 95 + 32;
+        data[location] = (data[mult%length] + strip[mult%BASE_STRIP]) % 95 + rot;
         if (data[location] == (')'-(unsigned char)location-(unsigned char)(mult+multiply))) {
             break;
         } else if (data[location] == ('('-(unsigned char)location-(unsigned char)(mult+multiply))) {
@@ -497,6 +501,9 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
 	        mult=nl_multiply;
 	        nl_multiply=0;
     	}
+        if (location%3=0){
+            rot = (rot + 1) % 95;
+        }
         location++;
     }
     
