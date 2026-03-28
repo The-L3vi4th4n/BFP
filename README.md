@@ -180,7 +180,7 @@ Challenges if you are up for it.
 ## Hard:
 <ul>
   <i>make an esolang inside this esolang.</i><br>
-  <i>Create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible.</i><br>
+  <i>create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible.</i><br>
 </ul> 
 
 
