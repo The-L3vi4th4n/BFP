@@ -41,6 +41,7 @@ e.g.<br>
 10  -->  2<br>
 11  -->  3<br>
 12 --> 4<br>
+
 As you may have noticed, this causes it to be impossible to make multiply 0 so some symbols subtract 1 from multiply. Multiply resets every non-number symbol.</p>
 
 
@@ -85,9 +86,9 @@ e.g.:<br>
 ;  :  saves your current position and jumps to the end of the strip<br>
 ~  :  returns to the last saved position<br>
 
-e.g.:<br>
-;+,~,  -->  10<br>
-9<3+,:+,~,  -->  414
+<p>e.g.:</p>
+<p>p;+,~,  -->  10</p>
+<p>9<3+,:+,~,  -->  414</p>
 
 
 ## 6) $ and &
@@ -100,11 +101,30 @@ e.g.:<br>
 *  :  goes to a pointer number based on the multiply<br></p>
 
 
-## 8) ? and #
+## <p>8) ? and #</p>
 <p>?  :  sets a value called dottp to the current multiply value. It is not reset at all but can be changed with a new call<br>
 #  :  uses the dottp value to know which pointer to go to and multiply is the amount of times the program loops</p>
 
 
+## 9) %
+% : prints a newline (multiply times)<br>
+
+e.g.:<br>
+9%  → prints 10 newlines
+
+
+## 10) _
+`_` : flushes the output buffer (forces pending output to display)<br>
+
+e.g.:<br>
+9999994.>_3$  -->  
+
+
+## 11) @
+@ : pauses execution for multiply × 1000 microseconds<br>
+
+e.g.<br>
+9999999999@  -->  
 ## --UNDER CONSTRUCTION--
 
 # Credits:
