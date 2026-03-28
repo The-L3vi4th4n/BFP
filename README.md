@@ -16,7 +16,7 @@ MAX_PTR with the maximum amount of pointers you would like<br>
 ver with bfp.c/bfph.c<br></i></b>
 name with the name of your code/filename of your code<br>
 
-the lines in italic are optional
+the lines in italic are optional and the output file is not an option with BFPL to make it smaller and the only reason it exists is so you can do stuff like use another program to access the data and draw it on a screen using a graphics library for example.
 
 compiler -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=STRIP_SIZE -DDEFAULT_PTR_MAX=MAX_PTR -DDEFAULT_OUTPUT='"output.bin"' ver -o name</p>
 
