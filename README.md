@@ -123,10 +123,34 @@ e.g.:<br>
 
 
 ## 11) @
-@ : pauses execution for multiply × 1000 microseconds<br>
+@ : pauses execution for multiply × 1000 microsecond<br>
 
 e.g.<br>
-9999999999@  -->  
+99999999999@  -->  pauses for 100*1000 microsecond so 0.1 second<br>
+99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999@  -->  1000*1000 microsecond so 1 second
+
+
+## 12) !
+!  -->  clears the screen by printing "\033[2J\033[H" and flushing the buffer<br>
+
+e.g.:<br>
+9999993+9.%9,99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999@!  -->  prints '::::::::::' followed by a newline and '58585858585858585858' then clears the buffer after 1 second<br>
+9999993+9.%9,9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999@!  -->  prints '::::::::::' followed by a newline and '58585858585858585858' then clears the buffer after 5 second
+
+
+## 13) =
+=  :  generates a random number from zero to multiply-1(if x was the number, 0<=x<10) and sets it to the current location on the strip<br> 
+
+e.g.:<br>
+99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999=,  -->  undefined behaviour(could return any number in the range)
+
+
+## 14) ' and "
+'  :  fills every location on the strip from the current one up till the one multiply-1 infront of it with 0. If multiply is 0, it clears the entire strip<br>
+"  :  fills every location on the strip from the current one up till the one multiply-1 infront of it with the value given to dottp. If multiply is 0, it clears the entire strip<br>
+
+e.g.:<br>
+...
 ## --UNDER CONSTRUCTION--
 
 # Credits:
