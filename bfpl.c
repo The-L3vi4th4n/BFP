@@ -103,13 +103,13 @@ int main(int args, char *argv[]){
             }
         } else if (data[i]=='*'){
             if (dottp!=0){
-                if (ptr < size){
-                    lp[ptr]++;
-                    if (lp[ptr] < multiply){
+                if (dottp < size){
+                    lp[dottp]++;
+                    if (lp[dottp] < multiply){
                         i = tpptr[dottp];
                         continue;
                     } else {
-                        lp[ptr] = 0;
+                        lp[dottp] = 0;
                     }
                 }
                 dottp=0;
