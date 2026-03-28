@@ -20,6 +20,10 @@ the lines in italic are optional and the output file is not an option with BFPL 
 
 compiler -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=STRIP_SIZE -DDEFAULT_PTR_MAX=MAX_PTR -DDEFAULT_OUTPUT='"output.bin"' ver -o name</p>
 
+e.g.<br>
+clang -DDEFAULT_PROGRAM='".bfp"' bfp.c -o name<br>
+gcc -DDEFAULT_PROGRAM='"code.txt"' -DDEFAULT_STRIP=500 -DDEFAULT_PTR_MAX=MAX_25 bfph.c -o code<br>
+clang -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX_100 -DDEFAULT_OUTPUT='"output.bin"' bfpl.c -o main<br>
 
 # 2 : Syntax
 
@@ -162,6 +166,21 @@ e.g.:<br>
 <p>// Source for the function - https://stackoverflow.com/a/912796<br>
 // Posted by anon, modified by community. See post 'Timeline' for change history<br>
 // Retrieved 2026-03-27, License - CC BY-SA 3.0<br></p>
+
+
+# Challenges:
+Challenges if you are up for it.
+Medium:
+<ul>
+  <i>make a text based game(rpg/story/whatever you desire).</i>
+  <i>make a simple calculator.</i>
+  <i>bring something from brainf*uck over to BFP/BFPL/BFPH.</i>
+</ul> 
+Hard:
+<ul>
+  <i>make an esolang inside this esolang.</i>
+  <i>Create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible.</i>
+</ul> 
 
 
 # End
