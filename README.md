@@ -1,6 +1,6 @@
 # BFP
 ## [!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within [¡GNINRAW!]
-<p>A brainf*ck inspired esolang which is designed to mess with you're head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands).</p>
+<p>A brainf*ck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainf*ck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops.</p>
 
 
 
@@ -91,7 +91,19 @@ e.g.:<br>
 
 
 ## 6) $ and &
-$  :  inputs a ...<br></p>
+<p>$  :  inputs numbers from the user based on the value of multiply<br>
+&  :  inputs letter from the user based on the value of multiply in ascii<br></p>
+
+
+## 7) ^ and *
+<p>^  :  creates a pointer to the current line of code you are at with a pointer number set by multiply<br>
+*  :  goes to a pointer number based on the multiply<br></p>
+
+
+## 8) ? and #
+<p>?  :  sets a value called dottp to the current multiply value. It is not reset at all but can be changed with a new call<br>
+#  :  uses the dottp value to know which pointer to go to and multiply is the amount of times the program loops</p>
+
 
 ## --UNDER CONSTRUCTION--
 
