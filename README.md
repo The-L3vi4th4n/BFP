@@ -105,6 +105,8 @@ e.g.:<br>
 <p>?  :  sets a value called dottp to the current multiply value. It is not reset at all but can be changed with a new call<br>
 #  :  uses the dottp value to know which pointer to go to and multiply is the amount of times the program loops</p>
 
+e.g.:<br>
+^9+>>5-<?10#
 
 ## 9) %
 % : prints a newline (multiply times)<br>
@@ -114,10 +116,10 @@ e.g.:<br>
 
 
 ## 10) _
-`_` : flushes the output buffer (forces pending output to display)<br>
+`_` : flushes the output buffer (forces the screen to display the text if needed)<br>
 
 e.g.:<br>
-9999994.>_3$  -->  
+9999993+._11$  -->  shows ':' and asks for 3 characters/numbers
 
 
 ## 11) @
