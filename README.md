@@ -153,8 +153,13 @@ e.g.:<br>
 ...
 ## --UNDER CONSTRUCTION--
 
+
 # Credits:
 ## credits to the getch(void) function for UNIX like devices:
 <p>// Source for the function - https://stackoverflow.com/a/912796<br>
 // Posted by anon, modified by community. See post 'Timeline' for change history<br>
 // Retrieved 2026-03-27, License - CC BY-SA 3.0<br></p>
+
+
+# End
+Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time or not notice them.
