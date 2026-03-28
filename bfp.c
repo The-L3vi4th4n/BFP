@@ -229,13 +229,13 @@ int main(int args, char *argv[]){
                 dottp = multiply-1;
             }
         } else if (data[i]=='#'){
-            if (ptr < PTR_MAX){
-                lp[ptr]++;
-                if (lp[ptr] < multiply){
+            if (dottp < PTR_MAX){
+                lp[dottp]++;
+                if (lp[dottp] < multiply){
                     i = tpptr[dottp];
                     continue;
                 } else {
-                    lp[ptr] = 0;
+                    lp[dottp] = 0;
                 }
             }
         } else if (data[i]=='$'){
