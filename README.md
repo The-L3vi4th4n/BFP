@@ -172,15 +172,15 @@ e.g.:<br>
 Challenges if you are up for it.
 ## Medium:
 <ul>
-  <i>make a text based game(rpg/story/whatever you desire).</i>
-  <i>make a simple calculator.</i>
-  <i>bring something from brainf*uck over to BFP/BFPL/BFPH.</i>
+  <i>make a text based game(rpg/story/whatever you desire).</i><br>
+  <i>make a simple calculator.</i><br>
+  <i>bring something from brainf*uck over to BFP/BFPL/BFPH.</i><br>
 </ul>
 
 ## Hard:
 <ul>
-  <i>make an esolang inside this esolang.</i>
-  <i>Create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible.</i>
+  <i>make an esolang inside this esolang.</i><br>
+  <i>Create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible.</i><br>
 </ul> 
 
 
