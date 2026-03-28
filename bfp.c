@@ -133,8 +133,8 @@ int main(int args, char *argv[]){
     unsigned int pvptr = 0;
     unsigned int *tpptr = malloc(sizeof(unsigned int) * PTR_MAX);
     memset(tpptr, 0, PTR_MAX * sizeof(unsigned int));
-    unsigned int *lp = malloc((sizeof(unsigned int) * (int)(PTR_MAX/2))+1);
-    memset(lp, 0, (sizeof(unsigned int) * (PTR_MAX/2 + 1)));
+    unsigned int *lp = malloc(sizeof(unsigned int) * PTR_MAX);
+    memset(lp, 0, PTR_MAX * sizeof(unsigned int));
     unsigned int dottp = 0;
     unsigned multiply = 1;
     unsigned nl_multiply = 0;
@@ -229,13 +229,13 @@ int main(int args, char *argv[]){
                 dottp = multiply-1;
             }
         } else if (data[i]=='#'){
-            if (ptr+1 < size){
-                lp[ptr+1]++;
-                if (lp[ptr+1] < multiply){
+            if (ptr < PTR_MAX){
+                lp[ptr]++;
+                if (lp[ptr] < multiply){
                     i = tpptr[dottp];
                     continue;
                 } else {
-                    lp[ptr+1] = 0;
+                    lp[ptr] = 0;
                 }
             }
         } else if (data[i]=='$'){
@@ -352,6 +352,7 @@ int main(int args, char *argv[]){
     }
     
     fclose(f);
+    free(lp);
     free(strip);
     free(data);
     free(tpptr);
