@@ -173,6 +173,7 @@ e.g.:<br>
 
 ## 19) `
 
+## 20) {} as functions using pointers
 ## --UNDER CONSTRUCTION--
 
 # Credits:
