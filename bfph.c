@@ -342,10 +342,10 @@ int main(int args, char *argv[]){
             }
         } else if (data[i] == ('"'-(unsigned char)(i)+(unsigned char)(multiply))) {
             if (multiply - 1 == 0){
-                memset(strip, dottp, size * sizeof(int));
+                memset(strip, dottp-1, size * sizeof(int));
             } else {
                 for (int k = 0; k < multiply - 1 && ptr + k < size; k++) {
-                    strip[ptr + k] = dottp;
+                    strip[ptr + k] = dottp-1;
                 }
             }
         } else if (data[i]==('/'-(unsigned char)(i)+(unsigned char)(multiply))){
