@@ -157,9 +157,23 @@ e.g.:<br>
 "  :  fills every location on the strip from the current one up till the one multiply-1 infront of it with the value given to dottp. If multiply is 0, it clears the entire strip<br>
 
 e.g.:<br>
-...
+999999993+.'999999996+.'999999993+.'9994+.'999999998+.'9999999995+.'999999996+.'999999997+.  -->  prints 'LOL QWOP' using only the first location on the strip
+9999993+.1?"2+,  -->  prints ':3' using only the first location on the strip
+
+
 ## --UNDER CONSTRUCTION--
 
+## 15) / and | and  \
+
+## 16) ( and )
+
+## 17) [ and ]
+
+## 18) { and }
+
+## 19) `
+
+## --UNDER CONSTRUCTION--
 
 # Credits:
 ## credits to the getch(void) function for UNIX like devices:
