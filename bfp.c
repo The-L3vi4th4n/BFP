@@ -39,6 +39,16 @@ char getch(void) {
 // Posted by anon, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-03-27, License - CC BY-SA 3.0
 
+#ifdef __APPLE__
+
+#else
+unsigned int arc4random_uniform(x){
+    static int seed=time(NULL);
+    srand(seed);
+    return(rand()%x);
+}
+#endif
+
 #ifndef DEFAULT_STRIP
 #define DEFAULT_STRIP 10000
 #endif
