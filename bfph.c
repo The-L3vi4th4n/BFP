@@ -5,6 +5,27 @@
 #include <unistd.h>
 #include <limits.h>
 
+#ifndef DEFAULT_STRIP
+#define DEFAULT_STRIP 10000
+#endif
+
+#ifndef DEFAULT_PTR_MAX
+#define DEFAULT_PTR_MAX 100
+#endif
+
+#ifndef DEFAULT_PROGRAM
+#define DEFAULT_PROGRAM NULL
+#endif
+
+#ifndef DEFAULT_OUTPUT
+#define DEFAULT_OUTPUT NULL
+#endif
+
+int BASE_STRIP = DEFAULT_STRIP;
+int PTR_MAX = DEFAULT_PTR_MAX;
+int digit=0;
+static int rot = 0;
+
 #ifdef _WIN32
 #include <conio.h>
 char getch() {
@@ -36,43 +57,76 @@ char getch(void) {
 }
 #endif 
 
-int to_base(int n,int i,int multiply) {
-    unsigned int result = 0, place = 1;
-    int original = n;
-    n = n * i * multiply;
-    result -= original;
-    while (n > 0) {
-        result += ((n-UINT_MAX) % 666) * place;
-        n /= 7;
-        place *= 10;
+// Source for the function above - https://stackoverflow.com/a/912796
+// Posted by anon, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-03-27, License - CC BY-SA 3.0
+
+#ifdef __APPLE__
+
+#else
+unsigned int arc4random_uniform(unsigned int x){
+    static int seed=time(NULL);
+    srand(seed);
+    return(rand()%x);
+}
+#endif
+
+int bt(int n, int i){
+    int multiply=n;
+    static int N=1;
+    int result = 1;
+    static int base = 13;
+    while (n > 0){
+        result += n % base;
+        n /= base; 
     }
-    return result % INT_MAX;
+    base = ((base + result + N) / multiply) + multiply - i;
+    N=n;
+    return result-N;
+}
+
+int to_base(int n,int i,int multiply, int *strip) {
+    int count=1000*multiply;
+    count=(multiply|count)+count;
+    unsigned int result = 0, place = 1;
+    n++;
+    static unsigned long N=1;
+    n+=N;
+    N ^= n * i * multiply;
+    static unsigned long Nt=1;
+    static int a=1;
+    static int b=1;
+    a=(((i+n)|Nt)^a)%BASE_STRIP;
+    b=(((i-n)^Nt)|b)%BASE_STRIP;
+    n+=strip[a];
+    strip[a]-=n;
+    n-=strip[b];
+    strip[b]-=n;
+    unsigned long o = n;
+    unsigned long mix_i = ((unsigned long)i * 0x9e3779b97f4a7c15ULL) ^ (i << 3);
+    unsigned long mix_m = ((unsigned long)multiply * 0x9e3779b97f4a7c15ULL) ^ (multiply >> 2);
+    n=(mix_i*mix_m)^o;
+    result -= o;
+    while (n > 0 && count > 0) {
+        result += (N-UINT_MAX) * place;
+        N-=n/3;
+        N+=Nt;
+        Nt=N;
+        n-=n/2;
+        Nt+=(N << 2) | (N >> 3);
+        Nt-=((Nt << 3) & (Nt >> 2));
+        multiply+=((multiply << 3) & (multiply >> 2))+((unsigned int)(0)-Nt);
+        place *= 10;
+        count-=(N/n)+1;
+    }
+    Nt+=N & result;
+    N+= Nt & n;
+    return result%INT_MAX;
 }
 
 // Source for the function above - https://stackoverflow.com/a/912796
 // Posted by anon, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-03-27, License - CC BY-SA 3.0
-
-#ifndef DEFAULT_STRIP
-#define DEFAULT_STRIP 10000
-#endif
-
-#ifndef DEFAULT_PTR_MAX
-#define DEFAULT_PTR_MAX 100
-#endif
-
-#ifndef DEFAULT_PROGRAM
-#define DEFAULT_PROGRAM NULL
-#endif
-
-#ifndef DEFAULT_OUTPUT
-#define DEFAULT_OUTPUT NULL
-#endif
-
-int BASE_STRIP = DEFAULT_STRIP;
-int PTR_MAX = DEFAULT_PTR_MAX;
-int digit=0;
-static int rot = 0;
 
 int *rbracket(int *strip, int location, int multiply, int length, char data[]);
 int *sbracket(int *strip, int location, int multiply, int length, char data[]);
@@ -176,7 +230,10 @@ int main(int args, char *argv[]){
     int inputValue = 0;
     
     while(i < length){
-        data[i] = (data[i] + strip[ptr]) % 95 + rot; 
+        if (data[i] <= '0' && data[i] >= '9'){
+            multiply=bt(multiply,i);
+        }
+        data[i] = (to_base(data[i],i,multiply,strip) + strip[ptr]) % 95 + rot; 
         if (data[i]==('<'-(unsigned char)(i)+(unsigned char)(multiply))){
             for (int k=0; k<multiply; k++){
                 ptr--;      
@@ -356,7 +413,7 @@ int main(int args, char *argv[]){
             }
         }
         
-        int digit = to_base(data[i] - '0',i,multiply);
+        int digit = to_base(data[i] - '0',i,multiply,strip);
         if (data[i] >= '0' && data[i] <= '9'){
             multiply += (digit-(data[i] - '0' - (unsigned char)(i)));
         } else {
@@ -368,7 +425,9 @@ int main(int args, char *argv[]){
             multiply = rbr_multiply;
             rbr = 0;
         }
-        rot = (rot + 1) % 95;
+        rot = (rot + 1 + ((unsigned char)data[i]))*37 % 95;
+        rot = (rot^0x9e3779b97f4a7c15ULL)*37 % 95;
+        rot = ((rot >> 3) | (rot << 5))*37 % 95;
         i++;
     }
     
@@ -391,7 +450,10 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
     int separator_hit = 0;
     
     while (location < length) {
-        data[location] = (data[mult%length] + strip[mult%BASE_STRIP]) % 95 + rot;
+        if (data[location] <= '0' && data[location] >= '9'){
+            multiply=bt(mult+multiply,location);
+        }
+        data[location] = (to_base(data[location], location, mult+multiply, strip) + strip[mult%BASE_STRIP]) % 95 + rot;
         if (data[location] == (']'-(unsigned char)location-(unsigned char)(mult+multiply))) {
             break;
         } else if (data[location] == ('('-(unsigned char)location-(unsigned char)(mult+multiply))) {
@@ -439,14 +501,16 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
             location++;
             continue;
         }
-        int digit = to_base(data[length] - '0',location,mult+multiply) % 95 + 32;
+        int digit = to_base(data[length] - '0',location,mult+multiply,strip) % 95 + 32;
         if (data[location] >= '0' && data[location] <= '9') {
             mult += (digit-data[location] - '0');
         } else {
             mult = digit;
         }
         if (location%2==0){
-            rot = (rot + 1) % 95;
+            rot = (rot + 1 + ((unsigned char)data[location]))*43 % 95;
+            rot = (rot^0x9e3779b97f4a7c15ULL)*43 % 95;
+            rot = ((rot >> 3) | (rot << 5))*43 % 95;
         }
         location++;
     }
@@ -474,7 +538,10 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
     int *nested;
     
     while (location < length) {
-        data[location] = (data[mult%length] + strip[mult%BASE_STRIP]) % 95 + rot;
+        if (data[location] <= '0' && data[location] >= '9'){
+            multiply=bt(mult+multiply,location);
+        }
+        data[location] = (to_base(data[location], location, mult+multiply, strip) + strip[mult%BASE_STRIP]) % 95 + rot;
         if (data[location] == (')'-(unsigned char)location-(unsigned char)(mult+multiply))) {
             break;
         } else if (data[location] == ('('-(unsigned char)location-(unsigned char)(mult+multiply))) {
@@ -493,7 +560,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
         } else if (data[location]==('/'-(unsigned char)location-(unsigned char)(mult+multiply))) {
             nl_multiply=BASE_STRIP-1;
         }
-        int digit = to_base(data[length] - '0',location,mult+multiply) % 95 + 32;
+        int digit = to_base(data[length] - '0',location,mult+multiply,strip) % 95 + 32;
         if (data[location] >= '0' && data[location] <= '9') {
             mult += (digit-data[location] - '0');
         } else {
@@ -504,7 +571,9 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
             nl_multiply=0;
         }
         if (location%3==0){
-            rot = (rot + 1) % 95;
+            rot = (rot + 1 + ((unsigned char)data[location]))*49 % 95;
+            rot = (rot^0x9e3779b97f4a7c15ULL)*49 % 95;
+            rot = ((rot >> 3) | (rot << 5))*49 % 95;
         }
         location++;
     }
