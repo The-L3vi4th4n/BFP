@@ -339,9 +339,9 @@ int main(int args, char *argv[]){
                 }
             }
         } else if (data[i]=='/'){
-        	if (dottp==1){
+        	if (dottp==0){
         		nl_multiply=size-1;
-        	} else if(dottp==2){
+        	} else if(dottp==1){
         		nl_multiply=i-1;
         	}
         }
