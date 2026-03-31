@@ -501,7 +501,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
             location++;
             continue;
         }
-        int digit = to_base(data[length] - '0',location,mult+multiply,strip) % 95 + 32;
+        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 95 + 32;
         if (data[location] >= '0' && data[location] <= '9') {
             mult += (digit-data[location] - '0');
         } else {
@@ -560,7 +560,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
         } else if (data[location]==('/'-(unsigned char)location-(unsigned char)(mult+multiply))) {
             nl_multiply=BASE_STRIP-1;
         }
-        int digit = to_base(data[length] - '0',location,mult+multiply,strip) % 95 + 32;
+        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 95 + 32;
         if (data[location] >= '0' && data[location] <= '9') {
             mult += (digit-data[location] - '0');
         } else {
