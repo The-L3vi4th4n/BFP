@@ -4,7 +4,8 @@
 
 
 
-# 1 : Compiling
+# 1 : Compiling to an application like thing
+(note compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./code_name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code where ver is bfpl.c/bfp.c/bfph.c)
 
 <p>replace:
 
@@ -13,7 +14,7 @@ compiler with clang/gcc<br>
 STRIP_SIZE with the size you want the strip to be<br>
 MAX_PTR with the maximum amount of pointers you would like<br>
 '"output.bin"' with the file which get's the location of strip[0] in memory<br>
-ver with bfp.c/bfph.c<br></i></b>
+ver with bfpl.c/bfp.c/bfph.c<br></i></b>
 name with the name of your code/filename of your code<br>
 
 the lines in italic are optional and the output file is not an option with BFPL to make it smaller and the only reason it exists is so you can do stuff like use another program to access the data and, for example, draw it on a screen using a graphics library.
