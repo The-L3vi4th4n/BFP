@@ -32,7 +32,7 @@ clang -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX
 <p>The syntax for BFP is intended to be weird. You can only use symbols and numbers in the language.<br>
 For example 'hello world' in the languages will look like:<br>
 bfp/bfpl  -->  >99999998+.1'999999999991+.1'999999999998+.1'999999999998+.1'9999999999992+.<br>
-bfph   -->   unknown<br>
+bfph   -->   unknown(it's syntax is confusing on purpose)<br>
 The list goes as follows:</p>
 
 
