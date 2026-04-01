@@ -1,5 +1,5 @@
 # BFP [Brainf*ck plus]
-## [!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within [¡GNINRAW!]
+## [!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within. Also I might forget to update something after changing it, though the code as of 1/4/2026 is prbly the final version I will publish myself[¡GNINRAW!]
 <p>A brainf*ck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainf*ck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops.</p>
 
 
