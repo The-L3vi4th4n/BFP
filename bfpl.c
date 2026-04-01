@@ -75,7 +75,7 @@ int main(int args, char *argv[]){
     memset(tpptr, 0, PTR_MAX * sizeof(unsigned int));
     unsigned int *lp = malloc(sizeof(unsigned int) * PTR_MAX);
     memset(lp, 0, PTR_MAX * sizeof(unsigned int));
-    unsigned int dottp = 0;
+    int dottp = -1;
     unsigned multiply = 1;
     unsigned char input = '\0';
     int inputValue = 0; 
@@ -102,7 +102,7 @@ int main(int args, char *argv[]){
                 tpptr[multiply-1] = i;
             }
         } else if (data[i]=='*'){
-            if (dottp!=0){
+            if (dottp>=0){
                 if (dottp < size){
                     lp[dottp]++;
                     if (lp[dottp] < multiply){
@@ -121,6 +121,8 @@ int main(int args, char *argv[]){
             if (multiply < PTR_MAX && multiply > 0){
                 dottp = multiply-1;
             }
+        } else if (data[i]=='\\'){
+            dottp=-1;
         } else if (data[i]=='$'){
             fflush(stdout);
             if (scanf("%c",&input)==1){
