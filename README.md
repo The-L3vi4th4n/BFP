@@ -5,11 +5,11 @@
 
 
 # 1 : Compiling to an application like thing
-(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code)
+(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler bfp.c -o bfp like clang bfp.c -o bfp)
 
 <p>replace:
 
-compiler with clang/gcc<br>
+compiler with clang/gcc/whatever you use<br>
 <b><i>name with '"name.bfp"' with the name of your code file(doesn't even have to be a .bfp extention file)<br>
 STRIP_SIZE with the size you want the strip to be<br>
 MAX_PTR with the maximum amount of pointers you would like<br>
