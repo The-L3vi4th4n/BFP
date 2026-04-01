@@ -39,12 +39,13 @@ char getch(void) {
 // Posted by anon, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-03-27, License - CC BY-SA 3.0
 
-#ifdef __APPLE__
-
-#else
-unsigned int arc4random_uniform(x){
-    static int seed=time(NULL);
-    srand(seed);
+#ifndef __APPLE__
+unsigned int arc4random_uniform(unsigned int x){
+    static int seedy=0;
+    if (seedy==0){
+        srand(time(NULL));
+        seedy=1;
+    }
     return(rand()%x);
 }
 #endif
@@ -332,17 +333,17 @@ int main(int args, char *argv[]){
             }
         } else if (data[i] == '"') {
             if (multiply - 1 == 0){
-                memset(strip, dottp-1, size * sizeof(int));
+                memset(strip, dottp, size * sizeof(int));
             } else {
                 for (int k = 0; k < multiply - 1 && ptr + k < size; k++) {
-                    strip[ptr + k] = dottp-1;
+                    strip[ptr + k] = dottp;
                 }
             }
         } else if (data[i]=='/'){
         	if (dottp==0){
         		nl_multiply=size-1;
         	} else if(dottp==1){
-        		nl_multiply=i-1;
+        		nl_multiply=i;
         	}
         }
         
@@ -372,7 +373,9 @@ int main(int args, char *argv[]){
 int *sbracket(int *strip, int location, int multiply, int length, char data[]){
     static int retd[2];
     int ret = 0;
+    int dottp = 0;
     int mult = multiply;
+    int nl_multiply=0;
     int val1 = 0;
     int val2 = 0;
     location++;
@@ -395,7 +398,11 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
             continue;
         } else if (data[location] == '|') {
             if (mult > 0 && mult <= BASE_STRIP) {
-                ret += strip[mult - 1];
+                nl_multiply = strip[mult-1];
+            }
+        } else if (data[location]=='?'){
+            if (mult < PTR_MAX && mult > 0){
+                dottp = mult-1;
             }
         } else if (data[location] == '+') {
             ret += mult;
@@ -427,10 +434,20 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
             ret = 0;
             location++;
             continue;
-        } else if (data[location] >= '0' && data[location] <= '9') {
+        }  else if (data[location]=='/'){
+            if (dottp==0){
+                nl_multiply=BASE_STRIP-1;
+            } else if(dottp==1){
+                nl_multiply=location;
+            }
+        } else if (data[location]=='\\'){
+            nl_multiply=0;
+        }
+        if (data[location] >= '0' && data[location] <= '9'){
             mult += data[location] - '0';
         } else {
             mult = 1;
+            mult += nl_multiply;
         }
         location++;
     }
@@ -451,6 +468,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[]){
 
 int *rbracket(int *strip, int location, int multiply, int length, char data[]){
     static int retd[2];
+    int dottp=0;
     int ret = 0;
     int mult = multiply;
     int nl_multiply=0;
@@ -467,24 +485,31 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[]){
             continue;
         } else if (data[location] == '|') {
             if (mult > 0 && mult <= BASE_STRIP) {
-                ret += strip[mult - 1];
+                nl_multiply = strip[mult-1];
             }
         } else if (data[location] == '+') {
             ret += mult;
+        } else if (data[location]=='?'){
+            if (mult < PTR_MAX && mult > 0){
+                dottp = mult-1;
+            }
         } else if (data[location] == '-') {
             ret -= mult;
       	} else if (data[location]=='/'){
-        	nl_multiply=BASE_STRIP-1;
+            if (dottp==0){
+                nl_multiply=BASE_STRIP-1;
+            } else if(dottp==1){
+                nl_multiply=location;
+            }
+        } else if (data[location]=='\\'){
+            nl_multiply=0;
         }
-        if (data[location] >= '0' && data[location] <= '9') {
+        if (data[location] >= '0' && data[location] <= '9'){
             mult += data[location] - '0';
         } else {
             mult = 1;
+            mult += nl_multiply;
         }
-        if (nl_multiply!=0){
-	        mult=nl_multiply;
-	        nl_multiply=0;
-    	}
         location++;
     }
     
