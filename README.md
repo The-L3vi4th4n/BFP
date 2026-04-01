@@ -5,7 +5,7 @@
 
 
 # 1 : Compiling to an application like thing
-(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./code_name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code)
+(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code)
 
 <p>replace:
 
