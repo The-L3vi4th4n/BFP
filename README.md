@@ -167,6 +167,8 @@ e.g.:<br>
 
 ## --UNDER CONSTRUCTION--
 
+Will add documentation for this later once I double check that everything up till here is correct.
+
 ## 15) / and | and  \
 
 ## 16) ( and )
