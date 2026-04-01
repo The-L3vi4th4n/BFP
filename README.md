@@ -5,7 +5,7 @@
 
 
 # 1 : Compiling to an application like thing
-(note compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./code_name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code)
+(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./code_name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code)
 
 <p>replace:
 
@@ -31,8 +31,8 @@ clang -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX
 
 <p>The syntax for BFP is intended to be weird. You can only use symbols and numbers in the language.<br>
 For example 'hello world' in the languages will look like:<br>
-bfp/bfpl  -->  >99999998+.1'999999999991+.1'999999999998+.1'999999999998+.1'9999999999992+.
-bfph   -->   unknown
+bfp/bfpl  -->  >99999998+.1'999999999991+.1'999999999998+.1'999999999998+.1'9999999999992+.<br>
+bfph   -->   unknown<br>
 The list goes as follows:</p>
 
 
