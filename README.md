@@ -200,4 +200,4 @@ Challenges if you are up for it.
 
 
 # End
-Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time or not notice them.
+Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time, not notice them or not be alive.
