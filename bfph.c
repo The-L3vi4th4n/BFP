@@ -375,6 +375,7 @@ int main(int args, char *argv[]){
         rot = (rot + 1 + ((unsigned char)data[i]))*37 % 95;
         rot = (rot^0x9e3779b97f4a7c15ULL)*37 % 95;
         rot = ((rot >> 3) | (rot << 5))*37 % 95;
+        rot += (rot & 1)*37 % 95;
         i++;
     }
     
@@ -475,6 +476,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
             rot = (rot + 1 + ((unsigned char)data[location]))*43 % 95;
             rot = (rot^0x9e3779b97f4a7c15ULL)*43 % 95;
             rot = ((rot >> 3) | (rot << 5))*43 % 95;
+            rot += (rot | 1)*43 % 95;
         }
         location++;
     }
@@ -547,6 +549,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
             rot = (rot + 1 + ((unsigned char)data[location]))*49 % 95;
             rot = (rot^0x9e3779b97f4a7c15ULL)*49 % 95;
             rot = ((rot >> 3) | (rot << 5))*49 % 95;
+            rot += (rot ^ 1)*49 %95;
         }
         location++;
     }
