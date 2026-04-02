@@ -5,7 +5,7 @@
 <a href='https://esolangs.org/wiki/BFP'>another project with the same name</a>
 
 # 1 : Compiling to an application like thing
-(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler bfp.c -o bfp like clang bfp.c -o bfp)
+(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver name.bfp STRIP_SIZE MAX_PTR output.bin every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler bfp.c -o bfp like clang bfp.c -o bfp)
 
 <p>replace:
 
