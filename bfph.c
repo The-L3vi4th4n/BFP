@@ -118,7 +118,7 @@ int main(int args, char *argv[]){
             printf("output file can't be opened\n");
             exit(1);
         }
-        fwrite(&strip[0], sizeof(int), 1, l);
+        fprintf(l, "%p\n", (void*)&strip[0]);
         fclose(l);
     }
     
