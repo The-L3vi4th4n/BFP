@@ -30,8 +30,8 @@ clang -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX
 
 
 <p>The syntax for BFP is intended to be weird. You can only use symbols and numbers in the language.<br>
-For example 'hello world' in the languages will look like:<br>
-bfp/bfpl  -->  >99999998+.1'999999999991+.1'999999999998+.1'999999999998+.1'9999999999992+.<br>
+For example printing 'hello' in the languages will look like:<br>
+bfp/bfpl  -->  99999998+.1'999999999991+.1'999999999998+.1'999999999998+.1'9999999999992+.<br>
 bfph   -->   unknown(it's syntax is confusing on purpose)<br>
 The list goes as follows:</p>
 
@@ -206,6 +206,10 @@ Challenges if you are up for it.
   <i>turn bfpl/bfp/bfph into a complier version to increase performance(this is my first lang ever, I have no clue how to do that)</i><br>
 </ul>
 
+
+# Random stuff:
+Random stuff I made and wanted to put here:<br>
+8+>9+>^+,:.~.:>.~?99999999999999999999999999992#  -->  prints every ascii(some are unprintable like the newline and tab character) character and their number
 
 # End
 Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time, not notice them or not be alive.
