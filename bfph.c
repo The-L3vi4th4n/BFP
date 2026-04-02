@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include <limits.h>
-#include <unistd.h>
 
 #ifdef _WIN32
 #include <conio.h>
