@@ -210,7 +210,8 @@ Challenges if you are up for it.
 # Random stuff:
 Random stuff I made and wanted to put here:<br>
 <p>8+>^+,:.~.%?99999999999999999999999999992#  -->  prints every ascii(some are unprintable like the newline and tab character) character and their number</p>
-<p>8+>^&,:.~_*  -->  prints the number and ascii value of the last key you pressed followed by a tab</p>
+<p>8+>^&,:.~_*  -->  prints the number and ascii value of the last key you pressed followed by a tab and so on and so forth</p>
+<p>^&!,%._*  --> prints the number and ascii value of the last key you pressed</p>
 
 
 # End
