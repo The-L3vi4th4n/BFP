@@ -180,7 +180,7 @@ int main(int args, char *argv[]){
         if (data[i] <= ('0' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply)) || data[i] >= ('9' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
             multiply=bt(multiply,i);
         }
-        data[i] = (to_base(data[i],i,multiply,strip) + strip[ptr]) % 95 + rot; 
+        data[i] = (to_base(data[i],i,multiply,strip) + strip[ptr]) % 255 + rot; 
         if (data[i]==('<'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
             for (int k=0; k<multiply; k++){
                 ptr--;      
@@ -372,10 +372,10 @@ int main(int args, char *argv[]){
             multiply = rbr_multiply;
             rbr = 0;
         }
-        rot = (rot + 1 + ((unsigned char)data[i]))*37 % 95;
-        rot = (rot^0x9e3779b97f4a7c15ULL)*37 % 95;
-        rot = ((rot >> 3) | (rot << 5))*37 % 95;
-        rot += (rot & 1)*37 % 95;
+        rot = (rot + 1 + ((unsigned char)data[i]))*37 % 255;
+        rot = (rot^0x9e3779b97f4a7c15ULL)*37 % 255;
+        rot = ((rot >> 3) | (rot << 5))*37 % 255;
+        rot += (rot & 1)*37 % 255;
         i++;
     }
     
@@ -466,17 +466,17 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
         } else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
             use_ptr_mode=0;
         }
-        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 95 + 32;
+        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
         if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
             mult += (digit-data[location] - '0');
         } else {
             mult = digit;
         }
         if (location%2==0){
-            rot = (rot + 1 + ((unsigned char)data[location]))*43 % 95;
-            rot = (rot^0x9e3779b97f4a7c15ULL)*43 % 95;
-            rot = ((rot >> 3) | (rot << 5))*43 % 95;
-            rot += (rot | 1)*43 % 95;
+            rot = (rot + 1 + ((unsigned char)data[location]))*43 % 255;
+            rot = (rot^0x9e3779b97f4a7c15ULL)*43 % 255;
+            rot = ((rot >> 3) | (rot << 5))*43 % 255;
+            rot += (rot | 1)*43 % 255;
         }
         location++;
     }
@@ -539,17 +539,17 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
         } else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
             use_ptr_mode=0;
         }
-        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 95 + 32;
+        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
         if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
             mult += (digit-data[location] - '0');
         } else {
             mult = digit;
         }
         if (location%3==0){
-            rot = (rot + 1 + ((unsigned char)data[location]))*49 % 95;
-            rot = (rot^0x9e3779b97f4a7c15ULL)*49 % 95;
-            rot = ((rot >> 3) | (rot << 5))*49 % 95;
-            rot += (rot ^ 1)*49 %95;
+            rot = (rot + 1 + ((unsigned char)data[location]))*49 % 255;
+            rot = (rot^0x9e3779b97f4a7c15ULL)*49 % 255;
+            rot = ((rot >> 3) | (rot << 5))*49 % 255;
+            rot += (rot ^ 1)*49 %255;
         }
         location++;
     }
@@ -564,7 +564,7 @@ int bt(int n, int i){
     int multiply=n;
     static int N=1;
     int result = 1;
-    static int base = 13;
+    static int base = 666;
     while (n > 0){
         result += n % base;
         n /= base; 
