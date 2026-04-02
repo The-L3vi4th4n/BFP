@@ -13,7 +13,7 @@ compiler with clang/gcc/whatever you use<br>
 <b><i>name with '"name.bfp"' with the name of your code file(doesn't even have to be a .bfp extention file)<br>
 STRIP_SIZE with the size you want the strip to be<br>
 MAX_PTR with the maximum amount of pointers you would like<br>
-'"output.bin"' with the file which get's the location of strip[0] in memory<br>
+'"output.bin"' with the file which get's the location of strip[0] in memory(useless as os's don't let you really use that for anything, might try to make it do something later)<br>
 ver with bfpl.c/bfp.c/bfph.c<br></i></b>
 name with the name of your code/filename of your code<br>
 
@@ -201,8 +201,9 @@ Challenges if you are up for it.
 ## Hard:
 <ul>
   <i>make an esolang inside this esolang.</i><br>
-  <i>create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible.</i><br>
-</ul> 
+  <i>create a game using output and another program to take the data from it and drawing that on the screen. To make it harder, you have to use BFP/BFPL/BFPH for the drawing and logic to the greatest extent possible. (If you choose to do this, you have to make the output system work and it would be even better if you could make it multi-os, thx. I personally have no idea how to do this, so sry for that and good luck)</i><br>
+  <i>turn bfpl/bfp/bfph into a complier version to increase performance(this is my first lang ever, I have no clue how to do that)</i><br>
+</ul>
 
 
 # End
