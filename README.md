@@ -2,7 +2,7 @@
 ## [!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within. Also I might forget to update something after changing it, though the code as of 1/4/2026 is prbly the final version I will publish myself [¡GNINRAW!]
 <p>A brainf*ck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainf*ck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops.</p>
 <a href='https://www.brainfuck.org/'>link to brainf*ck.org</a>
-
+<a href='https://esolangs.org/wiki/BFP'>another project with the same name</a>
 
 # 1 : Compiling to an application like thing
 (note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver "name.bfp" STRIP_SIZE MAX_PTR "output.bin" every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler bfp.c -o bfp like clang bfp.c -o bfp)
