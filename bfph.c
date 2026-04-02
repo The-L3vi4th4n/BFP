@@ -564,7 +564,7 @@ int bt(int n, int i){
     int multiply=n;
     static int N=1;
     int result = 1;
-    static int base = 666;
+    static int base = 3;
     while (n > 0){
         result += n % base;
         n /= base; 
