@@ -209,7 +209,9 @@ Challenges if you are up for it.
 
 # Random stuff:
 Random stuff I made and wanted to put here:<br>
-<p>8+>9+>^+,:.~.:>.~?99999999999999999999999999992#  -->  prints every ascii(some are unprintable like the newline and tab character) character and their number</p>
+<p>8+>^+,:.~.%?99999999999999999999999999992#  -->  prints every ascii(some are unprintable like the newline and tab character) character and their number</p>
+<p>8+>^&,:.~_*  -->  prints the number and ascii value of the last key you pressed followed by a tab</p>
+
 
 # End
 Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time, not notice them or not be alive.
