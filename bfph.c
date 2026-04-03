@@ -476,13 +476,13 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
     }
     
     if (!separator_hit) {
-        retd[0] = (ret != 0) ? 1 : 0;
+        retd[0] = (ret != 0) ? 0 : 1;
     } else if (mode == 0) {
-        retd[0] = (val1 == ret) ? 1 : 0;
+        retd[0] = (val1 == ret) ? 0 : 1;
     } else if (mode == 1) {
-        retd[0] = (val1 != ret) ? 1 : 0;
+        retd[0] = (val1 != ret) ? 0 : 1;
     } else {
-        retd[0] = (val1 == ret || val2 == ret) ? 1 : 0;
+        retd[0] = (val1 == ret || val2 == ret) ? 0 : 1;
     }
     
     retd[1] = location;
