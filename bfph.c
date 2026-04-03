@@ -243,11 +243,8 @@ int main(int args, char *argv[]){
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index = multiply - 1;
-            }
-            if (index >= 0 && index < size) {
-                nl_multiply = strip[index];
-            }
+                index=(index%size+size)%size;
+            nl_multiply = strip[index];
         } else if (data[i]==('`' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
             break;
         } else if (data[i]==('\\' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
@@ -421,11 +418,9 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index = mult - 1;
+                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
-            if (index >= 0 && index < BASE_STRIP) {
-                nl_multiply = strip[index];
-            }
+            nl_multiply = strip[index];
         } else if (data[location]==('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
             if (mult < PTR_MAX && mult > 0){
                 dottp = mult-1;
@@ -520,11 +515,9 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index = mult - 1;
+                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
-            if (index >= 0 && index < BASE_STRIP) {
-                nl_multiply = strip[index];
-            }
+            nl_multiply = strip[index];
         } else if (data[location] == ('+' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
             ret += mult;
         } else if (data[location]==('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
