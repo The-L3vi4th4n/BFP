@@ -112,7 +112,7 @@ int main(int args, char *argv[]){
                         lp[dottp] = 0;
                     }
                 }
-                dottp=0;
+                dottp=-1;
             } else if (multiply < PTR_MAX && multiply > 0){
                 i = tpptr[multiply-1];
                 continue;
@@ -121,8 +121,6 @@ int main(int args, char *argv[]){
             if (multiply < PTR_MAX && multiply > 0){
                 dottp = multiply-1;
             }
-        } else if (data[i]=='\\'){
-            dottp=-1;
         } else if (data[i]=='$'){
             fflush(stdout);
             if (scanf("%c",&input)==1){
