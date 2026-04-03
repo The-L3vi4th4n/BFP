@@ -243,7 +243,7 @@ int main(int args, char *argv[]){
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index=(index%size+size)%size;
+                index=((multiply-1)%size+size)%size;
             nl_multiply = strip[index];
         } else if (data[i]==('`' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
             break;
@@ -418,7 +418,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
+                index=((mult-1)%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
             nl_multiply = strip[index];
         } else if (data[location]==('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
@@ -515,7 +515,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
+                index=((mult-1)%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
             nl_multiply = strip[index];
         } else if (data[location] == ('+' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
