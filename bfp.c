@@ -233,7 +233,7 @@ int main(int args, char *argv[]){
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index=(index%size+size)%size;
+                index=((multiply-1)%size+size)%size;
             }
             nl_multiply = strip[index];
         } else if (data[i]=='`'){
@@ -409,7 +409,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
+                index=((multiply-1)%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
             nl_multiply = strip[index];
         } else if (data[location]=='?'){
@@ -504,7 +504,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
+                index=((multiply-1)%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
             nl_multiply = strip[index];
         } else if (data[location] == '+') {
