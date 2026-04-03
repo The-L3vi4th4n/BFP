@@ -233,11 +233,9 @@ int main(int args, char *argv[]){
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index = multiply - 1;
+                index=(index%size+size)%size;
             }
-            if (index >= 0 && index < size) {
-                nl_multiply = strip[index];
-            }
+            nl_multiply = strip[index];
         } else if (data[i]=='`'){
         	break;
         } else if (data[i]=='\\'){
@@ -411,11 +409,9 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index = mult - 1;
+                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
-            if (index >= 0 && index < BASE_STRIP) {
-                nl_multiply = strip[index];
-            }
+            nl_multiply = strip[index];
         } else if (data[location]=='?'){
             if (mult < PTR_MAX && mult > 0){
                 dottp = mult-1;
@@ -508,11 +504,9 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
             if (use_ptr_mode) {
                 index = ptr;
             } else {
-                index = mult - 1;
+                index=(index%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
             }
-            if (index >= 0 && index < BASE_STRIP) {
-                nl_multiply = strip[index];
-            }
+            nl_multiply = strip[index];
         } else if (data[location] == '+') {
             ret += mult;
         } else if (data[location]=='?'){
