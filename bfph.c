@@ -6,6 +6,8 @@
 
 #ifdef _WIN32
 #include <conio.h>
+#include <windows.h>
+#define usleep(time) Sleep((time)/1000)
 char getch() {
     return _getch();
 }
