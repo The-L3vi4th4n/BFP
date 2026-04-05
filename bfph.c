@@ -35,11 +35,12 @@ char getch(void) {
                 perror ("tcsetattr ~ICANON");
         return (buf);
 }
-#endif 
 
 // Source for the function above - https://stackoverflow.com/a/912796
 // Posted by anon, modified by community. See post 'Timeline' for change history
 // Retrieved 2026-03-27, License - CC BY-SA 3.0
+
+#endif
 
 #ifndef __APPLE__
 unsigned int arc4random_uniform(unsigned int x){
