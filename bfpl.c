@@ -82,14 +82,14 @@ int main(int args, char *argv[]){
     
     while(i < length){
         if (data[i]=='<'){
-        	ptr--;    	
+            ptr--;      
             if (ptr<0){
-            	ptr=size-1;
+                ptr=size-1;
             }
         } else if (data[i]=='>'){
-        	ptr++;
+            ptr++;
             if (ptr>=size){
-            	ptr=0;
+                ptr=0;
             }
         } else if (data[i]=='+'){
             strip[ptr]++;
@@ -124,21 +124,23 @@ int main(int args, char *argv[]){
         } else if (data[i]=='$'){
             fflush(stdout);
             if (scanf("%c",&input)==1){
-            	if (input!='\n' && input!='\0'){
-            		if (input >= '0' && input <= '9'){
-            			strip[ptr] = input - '0';
-            		}
-            		else {
-            	    	strip[ptr]=(unsigned char)input;
-            		}
-            	}
+                if (input!='\n' && input!='\0'){
+                    if (input >= '0' && input <= '9'){
+                        strip[ptr] = input - '0';
+                    }
+                    else {
+                        strip[ptr]=(unsigned char)input;
+                    }
+                }
             } else {
                 strip[ptr]=0;
             }
             while ((inputValue = getchar()) != '\n' && inputValue != EOF);
         }
-        if (data[i] >= '0' && data[i] <= '9'){
+        if (data[i]>='0' && data[i]<='9'){
             multiply += data[i] - '0';
+        } else if (data[i]=='|'){
+            multiply=strip[ptr];
         } else {
             multiply = 1;
         }
