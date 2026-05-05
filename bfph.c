@@ -72,7 +72,8 @@ unsigned int arc4random_uniform(unsigned int x){
 int BASE_STRIP = DEFAULT_STRIP;
 int PTR_MAX = DEFAULT_PTR_MAX;
 
-unsigned int rot = 0;
+unsigned int rot;
+int digit;
 
 int *rbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
 int *sbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
@@ -161,7 +162,6 @@ int main(int args, char *argv[]){
     unsigned int dpos = 0;
     unsigned int depth = 0;
     unsigned char input = '\0';
-    
     int *br_o;
     
     unsigned rbr_multiply = 0;
@@ -248,6 +248,7 @@ int main(int args, char *argv[]){
             } else {
                 index=((multiply-1)%size+size)%size;
             nl_multiply = strip[index];
+            }
         } else if (data[i]==('`' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
             break;
         } else if (data[i]==('\\' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
@@ -359,7 +360,7 @@ int main(int args, char *argv[]){
             use_ptr_mode=1;
         }
         
-        int digit = to_base(data[i] - '0',i,multiply,strip);
+        digit = to_base(data[i] - '0',i,multiply,strip);
         if (data[i] >= ('0' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply)) && data[i] <= ('9' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
             multiply += (digit-(data[i] - '0' - (unsigned char)(i)));
         } else {
@@ -386,7 +387,7 @@ int main(int args, char *argv[]){
     return 0;
 }
 
-int *sbracket(int *strip, int location, int multiply, int length, char data[], int ptr){
+int *sbracket(int *strip, int location, int multiply, int length, char data[], int ptr) {
     static int retd[2];
     int ret = 0;
     int dottp = 0;
@@ -463,7 +464,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
         } else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
             use_ptr_mode=0;
         }
-        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
+        digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
         if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
             mult += (digit-data[location] - '0');
         } else {
@@ -534,7 +535,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
         } else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
             use_ptr_mode=0;
         }
-        int digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
+        digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
         if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
             mult += (digit-data[location] - '0');
         } else {
@@ -570,16 +571,17 @@ int bt(int n, int i){
 }
 
 int to_base(int n,int i,int multiply, int *strip) {
+    static unsigned int loops = 4;
     int count=1000*multiply;
     count=(multiply|count)+count;
     unsigned int result = 0, place = 1;
     n++;
-    static unsigned long N=1;
+    static unsigned long N = 1;
     n+=N;
     N ^= n * i * multiply;
-    static unsigned long Nt=1;
-    static int a=1;
-    static int b=1;
+    static unsigned long Nt = 1;
+    static int a = 1;
+    static int b = 1;
     a=(((i+n)|Nt)^a)%BASE_STRIP;
     b=(((i-n)^Nt)|b)%BASE_STRIP;
     n+=strip[a];
@@ -591,6 +593,14 @@ int to_base(int n,int i,int multiply, int *strip) {
     unsigned long mix_m = ((unsigned long)multiply * 0x9e3779b97f4a7c15ULL) ^ (multiply >> 2);
     n=(mix_i*mix_m)^o;
     result -= o;
+    if (loops<=0){
+        Nt+=N & result;
+        N+= Nt & n;
+        loops=-1;
+        loops*=(N&n)^(a&b);
+        loops=loops%20;
+        return result%INT_MAX;
+    }
     while (n > 0 && count > 0) {
         result += (N-UINT_MAX) * place;
         N-=n/3;
@@ -603,6 +613,8 @@ int to_base(int n,int i,int multiply, int *strip) {
         place *= 10;
         count-=(N/n)+1;
     }
+    loops--;
+    to_base(N,n,result,strip);
     Nt+=N & result;
     N+= Nt & n;
     return result%INT_MAX;
