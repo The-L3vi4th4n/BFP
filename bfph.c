@@ -617,5 +617,6 @@ int to_base(int n,int i,int multiply, int *strip) {
     to_base(N,n,result,strip);
     Nt+=N & result;
     N+= Nt & n;
+    rot = (rot&N^n)%(rot+1);
     return result%INT_MAX;
 }
