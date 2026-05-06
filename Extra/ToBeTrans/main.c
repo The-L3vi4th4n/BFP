@@ -84,7 +84,7 @@ int main(void){
 		print("At school, you nearly fall asleep, but luckily, your friend wakes you up.",SPEED);
 		print("You wish you were more like them than the \033[1;31mlazy\033[0m child you are.",SPEED);
 		print("The teacher calls your name, and it feels off, but you answer and move on.",SPEED);
-		print("The school day feels like a century, but soon it comes to an end, and you are on the return bus home.\n\n",SPEED+750);
+		print("The school day feels like a century, but soon it comes to an end, and you are on the return bus home.",SPEED+750);
 	} else {
 		print("Sighing, you get ready and leave for the bus stop.",SPEED);
 		print("Complaining won’t get you anywhere.",SPEED);
@@ -92,8 +92,9 @@ int main(void){
 		print("You have a really \033[1;32mproductive\033[0m school day.",SPEED);
 		print("You manage to answer every question correctly at school, though your name feels a bit more off every time you hear it.",SPEED);
 		print("Probably a jamias vu moment.",SPEED);
-		print("The school day is full of \033[1;32mjoy\033[0m, but soon it comes to an end, and you are on the return bus home.\n\n",SPEED);
+		print("The school day is full of \033[1;32mjoy\033[0m, but soon it comes to an end, and you are on the return bus home.",SPEED);
 	}
+	puts("");
 	print(bc,0);
 	printf("what is your choice: ");
 	fflush(stdout);
@@ -136,8 +137,9 @@ int main(void){
 			print("Thoughts of what you could do fill your mind as you ride the bus home.",SPEED);
 		}
 	}
-	print("You enter your home and set your stuff up in your bedroom.",SPEED);
-	print("The night is silent, except for the occasional chirp of crickets and the croaking of frogs.\n\n",SPEED);
+	print("\nEntering your home, you set your stuff up in your bedroom.",SPEED);
+	print("The night is silent, except for the occasional chirp of crickets and the croaking of frogs.",SPEED);
+	puts("");
 	print(cc,0);
 	printf("what is your choice: ");
 	fflush(stdout);
