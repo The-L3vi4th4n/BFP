@@ -167,9 +167,15 @@ e.g.:<br>
 
 ## --UNDER CONSTRUCTION--
 
-Will add documentation for this later once I double check that everything up till here is correct. Might 
+Will add documentation for this later once I double check that everything up till here is correct.
 
 ## 15) / and | and  \
+/  :  sets use_ptr_mode to 1<br>
+|  :  if use_ptr_mode is 1, sets nl_multiply to the data at the current location on the strip. if use_ptr_mode is 0, sets nl_multiply to the data mult-1, wrapped around to fit the BASE_STRIP<br>
+\  :  sets use_ptr_mode to 0 if 1, other wise used in pairs for comment blocks. To set nl_multily to 0 you can make a location on the strip 0 and use location|<br>
+
+e.g.:<br>
+
 
 ## 16) ( and )
 
@@ -178,6 +184,7 @@ Will add documentation for this later once I double check that everything up til
 ## 18) { and }
 
 ## 19) `
+' 
 
 ## 20) {} as functions using pointers 
 (note: very complicated to actully write in bfp/bfph, so it's impractical but you can do it)<br>
