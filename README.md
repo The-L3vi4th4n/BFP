@@ -170,18 +170,21 @@ e.g.:<br>
 \  :  sets use_ptr_mode to 0 if 1, other wise used in pairs for comment blocks. To set nl_multily to 0 you can make a location on the strip 0 and use location|<br>
 
 e.g.:<br>
->3+,/|+,\1|-,  -->  prints "499999-1-1-1-1-1-1-1-1-1-1" which has no meaning but I'm keeping that in for now, as a temporary example
+>3+,/|+,\1|-,  -->  prints "499999-1-1-1-1-1-1-1-1-1-1" which has no meaning but I'm keeping that in for now, as a temporary example<br>
 
 ## --UNDER CONSTRUCTION--
 
 Will add documentation for this later once I double check that everything up till here is correct.
-
 
 ## 16) ( and )
 
 ## 17) [ and ]
 
 ## 18) { and }
+{  -->  only runs after a [] returns true. Otherwise, it's skipped
+}  -->  the clossing bracket for {
+
+e.g.:<br>
 
 ## 19) `
 ' ends the execution of the program instantly. Anything after it won't run<br>
@@ -191,6 +194,7 @@ e.g.:<br>
 
 ## 20) {} as functions using pointers 
 (note: very complicated to actully write in bfp/bfph, so it's impractical but you can do it)<br>
+
 ## --UNDER CONSTRUCTION--
 
 # Credits:
