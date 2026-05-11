@@ -5,11 +5,11 @@
 <a href='https://esolangs.org/wiki/BFP'>another project with the same name</a>
 
 # 1 : Compiling to an application like thing
-(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver name.bfp STRIP_SIZE MAX_PTR output.bin every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler bfp.c -o bfp like clang bfp.c -o bfp)
+(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver name.bfp STRIP_SIZE MAX_PTR output.bin every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler -O3 bfp.c -o bfp like clang bfp.c -o bfp)
 
 <p>replace:
 
-compiler with clang/gcc/whatever you use<br>
+compiler with clang/gcc/whatever you use and -O3<br>
 <b><i>name with '"name.bfp"' with the name of your code file(doesn't even have to be a .bfp extention file)<br>
 STRIP_SIZE with the size you want the strip to be<br>
 MAX_PTR with the maximum amount of pointers you would like<br>
@@ -19,12 +19,12 @@ name with the name of your code/filename of your code<br>
 
 the lines in italic are optional and the output file is not an option with BFPL to make it smaller and the only reason it exists is so you can do stuff like use another program to access the data and, for example, draw it on a screen using a graphics library(sadly memory doesn't work that way :(  ).
 
-compiler -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=STRIP_SIZE -DDEFAULT_PTR_MAX=MAX_PTR -DDEFAULT_OUTPUT='"output.bin"' ver -o name</p>
+compiler -O3 -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=STRIP_SIZE -DDEFAULT_PTR_MAX=MAX_PTR -DDEFAULT_OUTPUT='"output.bin"' ver -o name</p>
 
 e.g.<br>
-clang -DDEFAULT_PROGRAM='"name.bfp"' bfp.c -o name<br>
-gcc -DDEFAULT_PROGRAM='"code.txt"' -DDEFAULT_STRIP=500 -DDEFAULT_PTR_MAX=MAX_25 bfph.c -o code<br>
-clang -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX_100 -DDEFAULT_OUTPUT='"output.bin"' bfpl.c -o main<br>
+clang -O3 -DDEFAULT_PROGRAM='"name.bfp"' bfp.c -o name<br>
+gcc -O3 -DDEFAULT_PROGRAM='"code.txt"' -DDEFAULT_STRIP=500 -DDEFAULT_PTR_MAX=MAX_25 bfph.c -o code<br>
+clang -O3 -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX_100 -DDEFAULT_OUTPUT='"output.bin"' bfpl.c -o main<br>
 
 # 2 : Syntax
 
