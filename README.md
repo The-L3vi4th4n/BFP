@@ -22,7 +22,7 @@ the lines in italic are optional and the output file is not an option with BFPL 
 compiler -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=STRIP_SIZE -DDEFAULT_PTR_MAX=MAX_PTR -DDEFAULT_OUTPUT='"output.bin"' ver -o name</p>
 
 e.g.<br>
-clang -DDEFAULT_PROGRAM='".bfp"' bfp.c -o name<br>
+clang -DDEFAULT_PROGRAM='"name.bfp"' bfp.c -o name<br>
 gcc -DDEFAULT_PROGRAM='"code.txt"' -DDEFAULT_STRIP=500 -DDEFAULT_PTR_MAX=MAX_25 bfph.c -o code<br>
 clang -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX_100 -DDEFAULT_OUTPUT='"output.bin"' bfpl.c -o main<br>
 
@@ -164,17 +164,17 @@ e.g.:<br>
 999999993+.'999999996+.'999999993+.'9994+.'999999998+.'9999999995+.'999999996+.'999999997+.  -->  prints 'LOL QWOP' using only the first location on the strip<br>
 9999993+.1?"2+,  -->  prints ':3' using only the first location on the strip
 
-
-## --UNDER CONSTRUCTION--
-
-Will add documentation for this later once I double check that everything up till here is correct.
-
 ## 15) / and | and  \
 /  :  sets use_ptr_mode to 1<br>
 |  :  if use_ptr_mode is 1, sets nl_multiply to the data at the current location on the strip. if use_ptr_mode is 0, sets nl_multiply to the data mult-1, wrapped around to fit the BASE_STRIP<br>
 \  :  sets use_ptr_mode to 0 if 1, other wise used in pairs for comment blocks. To set nl_multily to 0 you can make a location on the strip 0 and use location|<br>
 
 e.g.:<br>
+>3+,/|+,\1|-,  -->  prints "499999-1-1-1-1-1-1-1-1-1-1" which has no meaning but I'm keeping that in for now, as a temporary example
+
+## --UNDER CONSTRUCTION--
+
+Will add documentation for this later once I double check that everything up till here is correct.
 
 
 ## 16) ( and )
@@ -184,7 +184,10 @@ e.g.:<br>
 ## 18) { and }
 
 ## 19) `
-' 
+' ends the execution of the program instantly. Anything after it won't run<br>
+
+e.g.:<br>
+99999991+.'%`99999992+.'%.  -->  prints 'A' with a newline, quitting before it can reach prining 'B' with a newline
 
 ## 20) {} as functions using pointers 
 (note: very complicated to actully write in bfp/bfph, so it's impractical but you can do it)<br>
