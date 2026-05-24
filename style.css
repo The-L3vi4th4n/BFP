@@ -7,18 +7,24 @@ a{
   color: #FAE7CB;
 }
 
+details{
+  max-width: 600px;
+  margin: 0 auto;
+  overflow-wrap: break-word;
+}
+
 .container{
-  min-width: 600px;
-  align: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .warning{
   color: #FAE7CB;
-}
-
-.body{
-  text-align: center;
 }
 
 .left{
