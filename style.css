@@ -15,9 +15,8 @@ details{
 
 .container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -25,6 +24,12 @@ details{
 
 .warning{
   color: #FAE7CB;
+}
+
+.bdy{
+  background-color: #76ABAE;
+  color: #F5F5F5;
+  text-align: center;
 }
 
 .left{
