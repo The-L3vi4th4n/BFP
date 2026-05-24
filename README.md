@@ -23,8 +23,8 @@ compiler -O3 -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=STRIP_SIZE -DDEFAULT
 
 e.g.<br>
 clang -O3 -DDEFAULT_PROGRAM='"name.bfp"' bfp.c -o name<br>
-gcc -O3 -DDEFAULT_PROGRAM='"code.txt"' -DDEFAULT_STRIP=500 -DDEFAULT_PTR_MAX=MAX_25 bfph.c -o code<br>
-clang -O3 -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=MAX_100 -DDEFAULT_OUTPUT='"output.bin"' bfpl.c -o main<br>
+gcc -O3 -DDEFAULT_PROGRAM='"code.txt"' -DDEFAULT_STRIP=500 -DDEFAULT_PTR_MAX=25 bfph.c -o code<br>
+clang -O3 -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX=100 -DDEFAULT_OUTPUT='"output.bin"' bfpl.c -o main<br>
 
 # 2 : Syntax
 
