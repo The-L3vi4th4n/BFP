@@ -271,12 +271,7 @@ int main(int args, char *argv[]){
             for (int j=0; j<multiply && ptr+j < size; j++){
                 if (scanf("%c",&input)==1){
                     if (input!='\n' && input!='\0'){
-                        if (input >= '0' && input <= '9'){
-                            strip[ptr+j] = input - '0';
-                        }
-                        else {
-                            strip[ptr+j]=(unsigned char)input;
-                        }
+                        strip[ptr+j]=(unsigned char)input;
                     }
                 } else {
                     strip[ptr+j]=0;
@@ -287,12 +282,7 @@ int main(int args, char *argv[]){
             for (int j=0; j<multiply && ptr+j < size; j++){
                 input=getch();
                 if (input!='\n' && input!='\0'){
-                    if (input >= '0' && input <= '9'){
-                        strip[ptr+j] = input - '0';
-                    }
-                    else {
-                        strip[ptr+j]=(unsigned char)input;
-                    }
+                    strip[ptr+j]=(unsigned char)input;
                 } else {
                     strip[ptr+j]=0;
                 }
