@@ -1,0 +1,26 @@
+body{
+  background-color: #76ABAE;
+  color: #F5F5F5;
+}
+
+a{
+  color: #FAE7CB;
+}
+
+.container{
+  min-width: 600px;
+  align: 0 auto;
+  padding: 20px;
+}
+
+.warning{
+  color: #FAE7CB;
+}
+
+.body{
+  text-align: center;
+}
+
+.left{
+  text-align: left;
+}
