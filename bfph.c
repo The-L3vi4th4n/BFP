@@ -61,7 +61,7 @@ unsigned int arc4random_uniform(unsigned int x){
 #define DEFAULT_PTR_MAX 100
 #endif
 
-#ifndef DEFAULT_PROGRAM
+                                                                                                                                                                                 #ifndef DEFAULT_PROGRAM
 #define DEFAULT_PROGRAM NULL
 #endif
 
@@ -74,12 +74,14 @@ int PTR_MAX = DEFAULT_PTR_MAX;
 
 unsigned int rot = 1;
 unsigned int its = 1;
+unsigned int dir = 1;
 int digit;
 
 int *rbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
 int *sbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
 int to_base(int n,int i,int multiply, int *strip);
 int bt(int n, int i);
+
 int main(int args, char *argv[]){
     int size = BASE_STRIP;
 
@@ -110,7 +112,8 @@ int main(int args, char *argv[]){
     if (args >= 4) {
         PTR_MAX = atoi(argv[3]);
     }
-                                                                                                                                                                                           if (args >= 5) {
+
+    if (args >= 5) {
         output_file = argv[4];
     }
 
@@ -125,8 +128,7 @@ int main(int args, char *argv[]){
     }
 
     FILE *f = fopen(program_file, "r");
-    if (!f) {
-        printf("file can't be opened: %s\n", program_file);
+    if (!f) {                                                                                                                                                                                  printf("file can't be opened: %s\n", program_file);
         exit(1);
     }
 
@@ -179,9 +181,16 @@ int main(int args, char *argv[]){
 
     while(i < length){
         its=rot;
-        while (its>0 && i<length){
+        while (its>0){
+                dir=(rot%3)-1;
                 rot=(rot+data[i])%256;
-                i++;
+                if (i+dir >= length){
+                        i=0;
+                } else if (i+dir < 0){
+                        i=length-1;
+                } else{
+                        i+=dir;
+                }
                 its--;
         }
 
@@ -399,9 +408,16 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 
     while (location < length) {
         its=rot;
-        while (its>0 && location<length){
+        while (its>0){
+                dir=(rot%3)-1;
                 rot=(rot+data[location])%256;
-                location++;
+                if (location+dir >= length){
+                        location=0;
+                } else if (location+dir < 0){
+                        location=length-1;
+                } else{
+                        location+=dir;
+                }
                 its--;
         }
 
@@ -507,9 +523,16 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
 
     while (location < length) {
         its=rot;
-        while (its>0 && location<length){
+        while (its>0){
+                dir=(rot%3)-1;
                 rot=(rot+data[location])%256;
-                location++;
+                if (location+dir >= length){
+                        location=0;
+                } else if (location+dir < 0){
+                        location=length-1;
+                } else{
+                        location+=dir;
+                }
                 its--;
         }
 
