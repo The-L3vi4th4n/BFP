@@ -274,8 +274,7 @@ int main(int args, char *argv[]) {
           strip[ptr + j] = 0;
         }
       }
-      while ((inputValue = getchar()) != '\n' && inputValue != EOF)
-        ;
+      while ((inputValue = getchar()) != '\n' && inputValue != EOF);
     } else if (data[i] == '&') {
       for (int j = 0; j < multiply && ptr + j < size; j++) {
         input = getch();
