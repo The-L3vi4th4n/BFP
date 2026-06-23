@@ -69,10 +69,8 @@ unsigned int arc4random_uniform(unsigned int x) {
 int BASE_STRIP = DEFAULT_STRIP;
 int PTR_MAX = DEFAULT_PTR_MAX;
 
-int *rbracket(int *strip, int location, int multiply, int length, char data[],
-              int ptr);
-int *sbracket(int *strip, int location, int multiply, int length, char data[],
-              int ptr);
+int *rbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
+int *sbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
 
 int main(int args, char *argv[]) {
   int size = BASE_STRIP;
@@ -371,8 +369,7 @@ int main(int args, char *argv[]) {
   return 0;
 }
 
-int *sbracket(int *strip, int location, int multiply, int length, char data[],
-              int ptr) {
+int *sbracket(int *strip, int location, int multiply, int length, char data[],int ptr) {
   static int retd[2];
   int ret = 0;
   int dottp = 0;
@@ -507,12 +504,16 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[],
       nl_multiply = strip[index];
     } else if (data[location] == '+') {
       ret += mult;
+    } else if (data[location] == '*') {
+      ret *= mult;
     } else if (data[location] == '?') {
       if (mult < PTR_MAX && mult > 0) {
         dottp = mult - 1;
       }
     } else if (data[location] == '-') {
       ret -= mult;
+    } else if (data[location] == '%') {
+      ret /= mult;
     } else if (data[location] == '/') {
       use_ptr_mode = 1;
     } else if (data[location] == '\\') {
