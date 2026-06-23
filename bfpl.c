@@ -19,22 +19,22 @@ int PTR_MAX = DEFAULT_PTR_MAX;
 
 int main(int args, char *argv[]){
     int size = BASE_STRIP;
-    
+
     char *program_file = NULL;
-    
+
     if (args >= 2) {
         program_file = argv[1];
     } else if (DEFAULT_PROGRAM) {
         program_file = DEFAULT_PROGRAM;
     } else {
-        printf("bfp file not given\n");
+        printf("bfpl file not given\n");
         exit(1);
     }
-    
+
     if (args >= 3) {
         BASE_STRIP = atoi(argv[2]);
     }
-    
+
     int *strip = malloc(sizeof(int) * BASE_STRIP);
     if (!strip) {
         printf("couldn't initialise the strip\n");
@@ -42,17 +42,17 @@ int main(int args, char *argv[]){
     }
     memset(strip, 0, BASE_STRIP * sizeof(int));
     size = BASE_STRIP;
-    
+
     if (args >= 4) {
         PTR_MAX = atoi(argv[3]);
     }
-    
+
     FILE *f = fopen(program_file, "r");
     if (!f) {
         printf("file can't be opened: %s\n", program_file);
         exit(1);
     }
-    
+
     long length = 0;
     fseek(f, 0, SEEK_END);
     length = ftell(f);
@@ -68,7 +68,7 @@ int main(int args, char *argv[]){
         exit(1);
     }
     data[length] = '\0';
-    
+
     int ptr = 0;
     unsigned int i = 0;
     unsigned int *tpptr = malloc(sizeof(unsigned int) * PTR_MAX);
@@ -78,11 +78,11 @@ int main(int args, char *argv[]){
     int dottp = -1;
     unsigned multiply = 1;
     unsigned char input = '\0';
-    int inputValue = 0; 
-    
+    int inputValue = 0;
+
     while(i < length){
         if (data[i]=='<'){
-            ptr--;      
+            ptr--;
             if (ptr<0){
                 ptr=size-1;
             }
@@ -125,12 +125,9 @@ int main(int args, char *argv[]){
             fflush(stdout);
             if (scanf("%c",&input)==1){
                 if (input!='\n' && input!='\0'){
-                    if (input >= '0' && input <= '9'){
-                        strip[ptr] = input - '0';
-                    }
-                    else {
-                        strip[ptr]=(unsigned char)input;
-                    }
+                    strip[ptr]=(unsigned char)input;
+                } else {
+                    strip[ptr]=0;
                 }
             } else {
                 strip[ptr]=0;
@@ -144,10 +141,10 @@ int main(int args, char *argv[]){
         } else {
             multiply = 1;
         }
-        
+
         i++;
     }
-    
+
     fclose(f);
     free(lp);
     free(strip);
