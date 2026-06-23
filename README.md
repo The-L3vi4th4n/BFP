@@ -232,7 +232,7 @@ Random stuff I made and wanted to put here:<br>
 </details>
 <p>[/|+\,0+]{999992+.1'}999993+.1'  -->  checks if the if statement is running corectly with 0 meaning it is and 1 meaning it isn't</p>
 <p>ToBeTrans  -->  A work in progress game about my past experiences. I have not actually gotten a diagnosis or anything remotely similar so it may not be accurate to all people. I still have to convert it so it works in bfp from the current c file. The game has 3 points where it asks for user input and 4 endings(2 good, 1 neutral and 1 bad).</p>
-<p>(58.)  -->  In bfph, this program makes it behave differently when you delete text you type in, you should try it out</p>
+<p>(58.)  -->  In bfph, this program makes it behave differently when you delete text you type in, you should try it out. This might not be that rare as "nevermore" also cause it to happen</p>
 <p>I am dead :O  -->  Clears the screen before printing ÿ and exiting in BFPH, I have no clue how this works and if it will work with future updates(especially to eventually fix the brackets, if I ever actually do it)</p>
 
 
