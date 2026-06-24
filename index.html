@@ -120,10 +120,12 @@
       <p>/ : sets use_ptr_mode to 1<br>| : if use_ptr_mode is 1, sets nl_multiply to the data at the current location on the strip. if use_ptr_mode is 0, sets nl_multiply to the data mult-1, wrapped around to fit the BASE_STRIP<br>\ : sets use_ptr_mode to 0 if 1, other wise used in pairs for comment blocks. To set nl_multily to 0 you can make a location on the strip 0 and use location|</p><br>
       <p>e.g.<br>3+,/|+,\1|-, : prints "499999-1-1-1-1-1-1-1-1-1-1" which has no meaning but I'm keeping that in for now, as a temporary example</p>
       <hr>
-      <h2>--UNDER CONSTRUCTION--</h2>
-      <hr>
       <h2>16) ( and )</h2>
+	  <p>( --> the start of the maths component, used to do maths quickly<br>) --> the end of the maths component</p><br>
+	  <p>e.g.:<br>(9+53+)+.% --> outputs "A" (106+4+1=65) followed by a new line<br>(9+54+)+.>(9+53+)+.>(9+6*)+.>(9+73+)+.>(9+6)+1-.>(9+72+)+.>(9+72+)+.>(9+6*)+1-.% --> outputs "BAGUETTE" followed by a new line</p>
       <hr>
+	  <h2>--UNDER CONSTRUCTION--</h2>
+	  <hr>
       <h2>17) [ and ]</h2>
       <hr>
       <h2>18) { and }</h2>
