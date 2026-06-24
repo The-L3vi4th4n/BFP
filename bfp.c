@@ -466,8 +466,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[],in
   return retd;
 }
 
-int *rbracket(int *strip, int location, int multiply, int length, char data[],
-              int ptr) {
+int *rbracket(int *strip, int location, int multiply, int length, char data[],int ptr) {
   static int retd[2];
   int dottp = 0;
   int ret = 0;
