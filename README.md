@@ -174,7 +174,7 @@ e.g.:<br>
 
 ## 16) ( and )
 (  -->  the start of the maths component, used to do maths quickly<br>
-)  -->  the end of the maths component<br>{
+)  -->  the end of the maths component<br>
 
 e.g.:<br>
 (9+5*3+)+.%  -->  outputs "A" (10*6+4+1=65) followed by a new line
