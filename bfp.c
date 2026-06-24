@@ -157,9 +157,6 @@ int main(int args, char *argv[]) {
 
   int *br_o;
 
-  unsigned rbr_multiply = 0;
-  unsigned int rbr = 0;
-
   unsigned sbr_multiply = 0;
   unsigned int sbr = 0;
 
@@ -289,15 +286,16 @@ int main(int args, char *argv[]) {
       strip[ptr] = arc4random_uniform(range);
     } else if (data[i] == '(') {
       br_o = rbracket(strip, i, multiply, size, data, ptr);
-      rbr = 1;
       strip[ptr] = br_o[0];
-      rbr_multiply = br_o[0];
+      multiply = br_o[0];
       i = br_o[1];
+      continue;
     } else if (data[i] == '[') {
       br_o = sbracket(strip, i, multiply, size, data, ptr);
-      sbr = 1;
       sbr_multiply = br_o[0];
+      sbr=1;
       i = br_o[1];
+      continue;
     } else if (data[i] == '{') {
       if (sbr_multiply == 0 && sbr == 1) {
         sbr = 0;
@@ -352,12 +350,6 @@ int main(int args, char *argv[]) {
       multiply = 1;
       multiply += nl_multiply;
     }
-
-    if (rbr) {
-      multiply = rbr_multiply;
-      rbr = 0;
-    }
-
     i++;
   }
 
