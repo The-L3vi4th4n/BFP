@@ -172,17 +172,23 @@ e.g.:<br>
 e.g.:<br>
 >3+,/|+,\1|-,  -->  prints "499999-1-1-1-1-1-1-1-1-1-1" which has no meaning but I'm keeping that in for now, as a temporary example<br>
 
+## 16) ( and )
+(  -->  the start of the maths component, used to do maths quickly<br>
+)  -->  the end of the maths component<br>{
+
+e.g.:<br>
+(9+5*3+)+.%  -->  outputs "A" (10*6+4+1=65) followed by a new line
+(9+5*4+)+.>(9+5*3+)+.>(9+6*)+.>(9+7*3+)+.>(9+6*)+1-.>(9+7*2+)+.>(9+7*2+)+.>(9+6*)+1-.%  -->  outputs "BAGUETTE" followed by a new line
+
 ## --UNDER CONSTRUCTION--
 
 Will add documentation for this later once I double check that everything up till here is correct.
 
-## 16) ( and )
-
 ## 17) [ and ]
 
 ## 18) { and }
-{  -->  only runs after a [] returns true. Otherwise, it's skipped
-}  -->  the clossing bracket for {
+{  -->  only runs after a [] returns true. Otherwise, it's skipped<br>
+}  -->  the clossing bracket for {<br>
 
 e.g.:<br>
 
