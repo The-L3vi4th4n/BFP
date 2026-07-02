@@ -8,7 +8,7 @@
 #include <conio.h>
 #include <windows.h>
 #define usleep(time) Sleep((time)/1000)
-char getch() {
+int getch() {
     return _getch();
 }
 #else
