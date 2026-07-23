@@ -1,5 +1,5 @@
-*.html -linguist-detectable=false
-*.png -linguist-detectable=false
-*.css -linguist-detectable=false
-*.bfp -linguist-detectable=false
-*.txt -linguist-detectable=true
+*.html -linguist-detectable
+*.png -linguist-detectable
+*.css -linguist-detectable
+*.bfp -linguist-detectable
+*.txt -linguist-detectable
