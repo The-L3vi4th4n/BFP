@@ -1,5 +1,4 @@
-*.html linguist-detectable=true
-*.png linguist-detectable=true
-*.css linguist-detectable=true
-*.bfp linguist-detectable=true
-*.txt linguist-detectable=true
+*.html linguist-detectable=false
+*.png linguist-detectable=false
+*.css linguist-detectable=false
+*.txt linguist-detectable=false
