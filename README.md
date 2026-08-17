@@ -240,8 +240,8 @@ Random stuff I made and wanted to put here:<br>
 </details>
 <p>[/|+\,0+]{999992+.1'}999993+.1'  -->  checks if the if statement is running corectly with 0 meaning it is and 1 meaning it isn't</p>
 <p>(58.)  -->  In bfph, this program makes it behave differently when you delete text you type in, you should try it out. This might not be that rare as "nevermore" also cause it to happen</p>
-<p>I am dead :O  -->  Clears the screen before printing ÿ and exiting in BFPH, I have no clue how this works and if it will work with future updates(especially to eventually fix the brackets, if I ever actually do it)</p>
-
+<p>I am dead :O  -->  Clears the screen before printing ÿ and exiting in BFPH, and also that it takes up to around 2 ms on my device with hyperfine checking. I have no clue how this works and if it will work with future updates(especially to eventually fix the brackets, if I ever actually do it)</p>
+<p>Cicada  -->  If you have seen the massive cicada program for BFP you might have realised I am a Good Kid fan and so I tried to test Cicada in BFPH because I just realised I could. It does literally nothing for a couple of seconds and exits. That's it. Pretty underwhelming but cool considering I barely found this type of program in BFPH before, mostly because I don't really spend much time in BFPH</p>
 
 # End
 Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time, not notice them or not be alive.
