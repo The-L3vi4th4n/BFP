@@ -495,7 +495,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[],in
 			break;
 		} else if (data[location] == '(') {
 			nested = rbracket(strip, location, mult, length, data, ptr);
-			ret += nested[0];
+			mult = nested[0];
 			location = nested[1] + 1;
 			continue;
 		} else if (data[location] == '<') {

@@ -543,7 +543,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
 			break;
 		} else if (data[location] == ('(' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			nested = rbracket(strip, location, mult, length, data, ptr);
-			ret += nested[0];
+			mult = nested[0];
 			location = nested[1] + 1;
 			continue;
 		} else if (data[location] == ('|' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
