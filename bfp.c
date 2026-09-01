@@ -239,6 +239,7 @@ int main(int args, char *argv[]) {
 		} else if (data[i] == '\\') {
 			if (use_ptr_mode != 0) {
 				use_ptr_mode = 0;
+				nl_multiply = 0;
 			} else {
 				i++;
 				while (i < length && data[i] != '\\') {
@@ -449,9 +450,10 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[],in
 		} else if (data[location] == '\\') {
 			if (use_ptr_mode != 0) {
 				use_ptr_mode = 0;
+				nl_multiply = 0;
 			} else {
 				location++;
-				while (location < BASE_STRIP && data[location] != '\\') {
+				while (location < length && data[location] != '\\') {
 					location++;
 				}
 			}
@@ -536,9 +538,10 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[],in
 		} else if (data[location] == '\\') {
 			if (use_ptr_mode != 0) {
 				use_ptr_mode = 0;
+				nl_multiply = 0;
 			} else {
 				location++;
-				while (location < BASE_STRIP && data[location] != '\\') {
+				while (location < length && data[location] != '\\') {
 					location++;
 				}
 			}

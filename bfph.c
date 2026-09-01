@@ -268,6 +268,7 @@ int main(int args, char *argv[]){
 			break;
 		} else if (data[i]==('\\' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
 			use_ptr_mode=0;
+			nl_multiply = 0;
 		} else if (data[i]==('?' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
 			if (multiply < PTR_MAX && multiply > 0){
 				dottp = multiply-1;
@@ -565,6 +566,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
 			use_ptr_mode=1;
 		} else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
 			use_ptr_mode=0;
+			nl_multiply = 0;
 		}
 		digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
 		if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {

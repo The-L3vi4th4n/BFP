@@ -181,23 +181,33 @@ e.g.:<br>
 (9+5*3+)+.%  -->  outputs "A" (10*6+4+1=65) followed by a new line
 (9+5*4+)+.>(9+5*3+)+.>(9+6*)+.>(9+7*3+)+.>(9+6*)+1-.>(9+7*2+)+.>(9+7*2+)+.>(9+6*)+1-.%  -->  outputs "BAGUETTE" followed by a new line
 
-## --UNDER CONSTRUCTION--
-
-Will add documentation for this later once I double check that everything up till here is correct.
-
 ## 17) [ and ]
+[  -->  used to compare values<br>
+	, -> ==<br>
+	. -> !=<br>
+	; and : -> a==b or a==c<br>
+]  -->  the closing bracket for [<br>
+
+e.g.:<br>
+
+^[+ , +]{\`}*  -->  ends the program instantly becuase the statment is true <br>
+^[1+ , +]{\`}*  -->  doesn't end the program instantly becuase the statement is false and loops forever <br>
+
 
 ## 18) { and }
 {  -->  only runs after a [] returns true. Otherwise, it's skipped<br>
 }  -->  the clossing bracket for {<br>
 
 e.g.:<br>
+^ &  ._ [/|+\- ,]{%`} *  -->  reads a character from the user, outputs it and if the stored value is zero, it ends the program
 
 ## 19) `
 ' ends the execution of the program instantly. Anything after it won't run<br>
 
 e.g.:<br>
 99999991+.'%`99999992+.'%.  -->  prints 'A' with a newline, quitting before it can reach prining 'B' with a newline
+
+## --UNDER CONSTRUCTION--
 
 ## 20) {} as functions using pointers 
 (note: very complicated to actully write in bfp/bfph, so it's impractical but you can do it)<br>

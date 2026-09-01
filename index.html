@@ -13,7 +13,7 @@
     <div class="bdy">
       <h1>BFP</h1>
       <hr>
-      <h2 class="warning">[!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within. Also I might forget to update something after changing it [¡GNINRAW!]</h2>
+      <h2 class="warning">[!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within. Also I might forget to update something after changing it. Also this website is best seen with lynx becuase idk how to use CSS better than this [¡GNINRAW!]</h2>
       <hr>
       <h2 class="warning">A brainf*ck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainf*ck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops.</h2>
       <a href="https://www.brainfuck.org/">Link To Brainf*ck.org</a><br>
@@ -126,25 +126,30 @@
       <p>e.g.<br>3+,/|+,\1|-, : prints "499999-1-1-1-1-1-1-1-1-1-1" which has no meaning but I'm keeping that in for now, as a temporary example</p>
       <hr>
       <h2>16) ( and )</h2>
+      <hr>
 	  <p>( --> the start of the maths component, used to do maths quickly<br>) --> the end of the maths component</p><br>
 	  <p>e.g.:<br>(9+53+)+.% --> outputs "A" (106+4+1=65) followed by a new line<br>(9+54+)+.>(9+53+)+.>(9+6*)+.>(9+73+)+.>(9+6)+1-.>(9+72+)+.>(9+72+)+.>(9+6*)+1-.% --> outputs "BAGUETTE" followed by a new line</p>
       <hr>
-	  <h2>--UNDER CONSTRUCTION--</h2>
-	  <hr>
       <h2>17) [ and ]</h2>
+      <hr>
+      <p>[  -->  used to compare values<br>, -> ==<br>. -> !=<br>; and : -> a==b or a==c<br>]  -->  the closing bracket for [</p>
+      <p>e.g.:<br>^[+ , +]{\`}*  -->  ends the program instantly becuase the statment is true <br>^[1+ , +]{\`}*  -->  doesn't end the program instantly becuase the statement is false and loops forever <br></p>
       <hr>
       <h2>18) { and }</h2>
       <hr>
       <p>{ : only runs after a [] returns true. Otherwise, it's skipped<br>} : the clossing bracket for {</p>
+      <p>e.g.:<br>^ &  ._ [/|+\- ,]{%`} *  -->  reads a character from the user, outputs it and if the stored value is zero, it ends the program</p>
       <hr>
       <h2>19) `</h2>
       <hr>
       <p>' ends the execution of the program instantly. Anything after it won't run</p><br>
       <p>e.g.<br>99999991+.'%`99999992+.'%. : prints 'A' with a newline, quitting before it can reach prining 'B' with a newline</p>
       <hr>
+      <h2>--UNDER CONSTRUCTION--</h2>
+      <hr>
       <h2>20) {} as functions using pointers </h2>
       <hr>
-      <p class="warning">(note: very complicated to actully write in bfp/bfph, so it's impractical but you can do it)</p><br>
+      <p class="warning">(note: very complicated to actully write in bfp/bfph because you need a if statment to glitch into the {}, so it's impractical but you can do it)</p><br>
       <hr>
       <h2>--UNDER CONSTRUCTION--</h2>
       <hr>
