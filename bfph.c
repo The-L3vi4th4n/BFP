@@ -399,7 +399,6 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 	int mult = 1;
 	int nl_multiply=0;
 	int val1 = 0;
-	int val2 = 0;
 	location++;
 	int *nested;
 	int mode = 0;
@@ -474,8 +473,10 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 			location++;
 			continue;
 		} else if (data[location] == (':' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
-			val2 = ret;
+			mode = 3;
+			val1 = ret;
 			ret = 0;
+			separator_hit = 1;
 			location++;
 			continue;
 		}  else if (data[location]==('/' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
@@ -503,8 +504,10 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 		retd[0] = (val1 == ret) ? 0 : 1;
 	} else if (mode == 1) {
 		retd[0] = (val1 != ret) ? 0 : 1;
-	} else {
-		retd[0] = (val1 == ret || val2 == ret) ? 0 : 1;
+	} else if (mode == 2) {
+		retd[0] = (val1 > ret) ? 0 : 1;
+	} else if (mode == 3) {
+		retd[0] = (val1 < ret) ? 0 : 1;
 	}
 
 	retd[1] = location;

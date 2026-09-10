@@ -185,7 +185,8 @@ e.g.:<br>
 [  -->  used to compare values<br>
 	, -> ==<br>
 	. -> !=<br>
-	; and : -> a==b or a==c<br>
+	: -> < <br>
+	; -> > <br>
 ]  -->  the closing bracket for [<br>
 
 e.g.:<br>
