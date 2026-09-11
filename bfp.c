@@ -293,6 +293,8 @@ int main(int args, char *argv[]) {
 		} else if (data[i] == '[') {
 			br_o = sbracket(strip, i, multiply, size, data, ptr);
 			sbr_multiply = br_o[0];
+			multiply = 1;
+			multiply += nl_multiply;
 			sbr=1;
 			i = br_o[1];
 			continue;
@@ -377,16 +379,17 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[],in
 
 	while (location < length) {
 		if (data[location] == ']') {
+			location++;
 			break;
 		} else if (data[location] == '(') {
 			nested = rbracket(strip, location, mult, length, data, ptr);
 			ret += nested[0];
-			location = nested[1] + 1;
+			location = nested[1];
 			continue;
 		} else if (data[location] == '[') {
 			nested = sbracket(strip, location, mult, length, data, ptr);
 			ret += nested[0];
-			location = nested[1] + 1;
+			location = nested[1];
 			continue;
 		} else if (data[location] == '<') {
 			for (int k = 0; k < mult; k++) {
@@ -501,7 +504,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[],in
 		} else if (data[location] == '(') {
 			nested = rbracket(strip, location, mult, length, data, ptr);
 			mult = nested[0];
-			location = nested[1] + 1;
+			location = nested[1];
 			continue;
 		} else if (data[location] == '<') {
 			for (int k = 0; k < mult; k++) {

@@ -424,16 +424,17 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 			mult=bt(mult+multiply,location);
 		}
 		if (data[location] == (']' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			location++;
 			break;
 		} else if (data[location] == ('(' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			nested = rbracket(strip, location, mult, length, data, ptr);
 			ret += nested[0];
-			location = nested[1] + 1;
+			location = nested[1];
 			continue;
 		} else if (data[location] == ('[' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			nested = sbracket(strip, location, mult, length, data, ptr);
 			ret += nested[0];
-			location = nested[1] + 1;
+			location = nested[1];
 			continue;
 		} else if (data[location] == ('|' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			if (use_ptr_mode) {
@@ -548,7 +549,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
 		} else if (data[location] == ('(' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			nested = rbracket(strip, location, mult, length, data, ptr);
 			mult = nested[0];
-			location = nested[1] + 1;
+			location = nested[1];
 			continue;
 		} else if (data[location] == ('|' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			if (use_ptr_mode) {
