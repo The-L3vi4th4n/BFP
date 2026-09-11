@@ -1,1 +1,1 @@
-RockPaperScissors.bfp / RockPaperScissorsButWorse.bfp  -->  Rock Paper Scissors. Press 1 / r for rock, 2 / p for paper, and 3 / s for scissors.
+RockPaperScissors.bfp / RockPaperScissorsButWorse.bfp  -->  Rock Paper Scissors. The first input is the amount of rounds you want to play. The limit is 11 digits. You can clear the number by tapping delete / backpace. Then, press 1 / r for rock, 2 / p for paper, and 3 / s for scissors.
