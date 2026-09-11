@@ -310,7 +310,6 @@ int main(int args, char *argv[]){
 		} else if (data[i]==('(' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
 			br_o = rbracket(strip, i, multiply, size, data, ptr);
 			rbr = 1;
-			strip[ptr] = br_o[0];
 			rbr_multiply = br_o[0];
 			i = br_o[1];
 		} else if (data[i]==('[' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
@@ -544,6 +543,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
 			mult=bt(mult+multiply,location);
 		}
 		if (data[location] == (')' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			location++;
 			break;
 		} else if (data[location] == ('(' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			nested = rbracket(strip, location, mult, length, data, ptr);

@@ -287,7 +287,6 @@ int main(int args, char *argv[]) {
 			strip[ptr] = arc4random_uniform(range);
 		} else if (data[i] == '(') {
 			br_o = rbracket(strip, i, multiply, size, data, ptr);
-			strip[ptr] = br_o[0];
 			multiply = br_o[0];
 			i = br_o[1];
 			continue;
@@ -497,6 +496,7 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[],in
 
 	while (location < length) {
 		if (data[location] == ')') {
+			location++;
 			break;
 		} else if (data[location] == '(') {
 			nested = rbracket(strip, location, mult, length, data, ptr);
