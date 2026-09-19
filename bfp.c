@@ -157,8 +157,7 @@ int main(int args, char *argv[]) {
 
 	int *br_o;
 
-	unsigned sbr_multiply = 0;
-	unsigned int sbr = 0;
+	unsigned sbr_multiply = 1;
 
 	unsigned char letter = '\0';
 	int range = 0;
@@ -292,15 +291,14 @@ int main(int args, char *argv[]) {
 			continue;
 		} else if (data[i] == '[') {
 			br_o = sbracket(strip, i, multiply, size, data, ptr);
-			sbr_multiply = br_o[0];
+			if (sbr_multiply!=0) sbr_multiply = br_o[0];
 			multiply = 1;
 			multiply += nl_multiply;
-			sbr=1;
 			i = br_o[1];
 			continue;
 		} else if (data[i] == '{') {
-			if (sbr_multiply == 0 && sbr == 1) {
-				sbr = 0;
+			if (sbr_multiply == 0) {
+				sbr_multiply = 1;
 				i++;
 				continue;
 			} else {
