@@ -124,11 +124,7 @@ int main(int args, char *argv[]){
 		} else if (data[i]=='$'){
 			fflush(stdout);
 			if (scanf("%c",&input)==1){
-				if (input!='\n' && input!='\0'){
 					strip[ptr]=(unsigned char)input;
-				} else {
-					strip[ptr]=0;
-				}
 			} else {
 				strip[ptr]=0;
 			}

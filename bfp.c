@@ -262,9 +262,7 @@ int main(int args, char *argv[]) {
 		} else if (data[i] == '$') {
 			for (int j = 0; j < multiply && ptr + j < size; j++) {
 				if (scanf("%c", &input) == 1) {
-					if (input != '\n' && input != '\0') {
-						strip[ptr + j] = (unsigned char)input;
-					}
+					strip[ptr + j] = (unsigned char)input;
 				} else {
 					strip[ptr + j] = 0;
 				}
@@ -273,11 +271,7 @@ int main(int args, char *argv[]) {
 		} else if (data[i] == '&') {
 			for (int j = 0; j < multiply && ptr + j < size; j++) {
 				input = getch();
-				if (input != '\n' && input != '\0') {
-					strip[ptr + j] = (unsigned char)input;
-				} else {
-					strip[ptr + j] = 0;
-				}
+				strip[ptr + j] = (unsigned char)input;
 			}
 		} else if (data[i] == '=') {
 			range = multiply;

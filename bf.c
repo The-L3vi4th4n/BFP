@@ -74,7 +74,6 @@ int main(int args, char *argv[]){
 	unsigned int *tpptr = malloc(sizeof(unsigned int) * PTR_MAX);
 	memset(tpptr, 0, PTR_MAX * sizeof(unsigned int));
 	unsigned char input = '\0';
-	int inputValue = 0;
 
 	while(i < length){
 		int loc = 1;
@@ -125,7 +124,6 @@ int main(int args, char *argv[]){
 			} else {
 				strip[ptr]=0;
 			}
-			while ((inputValue = getchar()) != '\n' && inputValue != EOF);
 		}
 
 		i++;
