@@ -6,16 +6,11 @@
 #define DEFAULT_STRIP 10000
 #endif
 
-#ifndef DEFAULT_PTR_MAX
-#define DEFAULT_PTR_MAX 100
-#endif
-
 #ifndef DEFAULT_PROGRAM
 #define DEFAULT_PROGRAM NULL
 #endif
 
 int BASE_STRIP = DEFAULT_STRIP;
-int PTR_MAX = DEFAULT_PTR_MAX;
 
 int main(int args, char *argv[]){
 	int size = BASE_STRIP;
@@ -43,10 +38,6 @@ int main(int args, char *argv[]){
 	memset(strip, 0, BASE_STRIP * sizeof(unsigned char));
 	size = BASE_STRIP;
 
-	if (args >= 4) {
-		PTR_MAX = atoi(argv[3]);
-	}
-
 	FILE *f = fopen(program_file, "r");
 	if (!f) {
 		printf("file can't be opened: %s\n", program_file);
@@ -71,8 +62,6 @@ int main(int args, char *argv[]){
 
 	int ptr = 0;
 	unsigned int i = 0;
-	unsigned int *tpptr = malloc(sizeof(unsigned int) * PTR_MAX);
-	memset(tpptr, 0, PTR_MAX * sizeof(unsigned int));
 	char input = '\0';
 
 	while(i < length){
@@ -130,6 +119,5 @@ int main(int args, char *argv[]){
 	fclose(f);
 	free(strip);
 	free(data);
-	free(tpptr);
 	return 0;
 }
