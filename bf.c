@@ -35,12 +35,12 @@ int main(int args, char *argv[]){
 		BASE_STRIP = atoi(argv[2]);
 	}
 
-	int *strip = malloc(sizeof(int) * BASE_STRIP);
+	unsigned char *strip = malloc(sizeof(char) * BASE_STRIP);
 	if (!strip) {
 		printf("couldn't initialise the strip\n");
 		exit(1);
 	}
-	memset(strip, 0, BASE_STRIP * sizeof(int));
+	memset(strip, 0, BASE_STRIP * sizeof(unsigned char));
 	size = BASE_STRIP;
 
 	if (args >= 4) {
@@ -73,7 +73,7 @@ int main(int args, char *argv[]){
 	unsigned int i = 0;
 	unsigned int *tpptr = malloc(sizeof(unsigned int) * PTR_MAX);
 	memset(tpptr, 0, PTR_MAX * sizeof(unsigned int));
-	unsigned char input = '\0';
+	char input = '\0';
 
 	while(i < length){
 		int loc = 1;
@@ -115,12 +115,9 @@ int main(int args, char *argv[]){
 			}
 		} else if (data[i]==','){
 			fflush(stdout);
-			if (scanf("%c",&input)==1){
-				if (input!='\n' && input!='\0'){
-					strip[ptr]=(unsigned char)input;
-				} else {
-					strip[ptr]=0;
-				}
+			input = getchar();
+			if (input!=EOF){
+				strip[ptr]=(unsigned char)input;
 			} else {
 				strip[ptr]=0;
 			}
