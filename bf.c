@@ -93,6 +93,7 @@ int main(int args, char *argv[]){
 			strip[ptr]--;
 		} else if (data[i]=='.'){
 			printf("%c",(unsigned char)strip[ptr]);
+			fflush(stdout);
 		} else if (data[i]=='[' && strip[ptr]==0){
 			while (1){
 				i++;
