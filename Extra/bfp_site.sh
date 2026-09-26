@@ -1,0 +1,1 @@
+emcc bfpt.c -o ../bfp.html -O3 -s ASYNCIFY --embed-file cicada.bfp@cicada --embed-file games/RockPaperScissors.bfp@RockPaperScissors --embed-file games/RockPaperScissorsButWorse.bfp@RockPaperScissorsButWorse  --embed-file games/BouncingThing.bfp@BouncingThing --embed-file games/TerminalMoveThing.bfp@TerminalMoveThing --embed-file games/temp.bfp@temp

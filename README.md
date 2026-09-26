@@ -4,6 +4,7 @@
 <a href='https://www.brainfuck.org/'>link to brainfuck.org</a><br>
 <a href='https://aminet.net/package/dev/lang/brainfuck-2.lha'>the original interpreter(if I am not wrong)</a><br>
 <a href='https://esolangs.org/wiki/BFP'>another project with the same name</a>
+<a href="bfp.html">run the bfp programs I wrote(e.g. cicada or RockPaperScissors, tho beware the clear screen doesn't work so I replaced it with new line spam)</a>
 
 # 1 : Compiling to an application like thing
 (note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver name.bfp STRIP_SIZE MAX_PTR output.bin every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler -O3 bfp.c -o bfp like clang bfp.c -o bfp)
