@@ -3,7 +3,7 @@
 <p>A brainfuck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainfuck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops.</p>
 <a href='https://www.brainfuck.org/'>link to brainfuck.org</a><br>
 <a href='https://aminet.net/package/dev/lang/brainfuck-2.lha'>the original interpreter(if I am not wrong)</a><br>
-<a href='https://esolangs.org/wiki/BFP'>another project with the same name</a>
+<a href='https://esolangs.org/wiki/BFP'>another project with the same name</a><br>
 <a href="bfp.html">run the bfp programs I wrote(e.g. cicada or RockPaperScissors, tho beware the clear screen doesn't work so I replaced it with new line spam)</a>
 
 # 1 : Compiling to an application like thing
