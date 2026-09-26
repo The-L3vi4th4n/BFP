@@ -103,7 +103,7 @@ e.g.:<br>
 
 ## 6) $ and &
 <p>$  :  inputs numbers from the user based on the value of multiply<br>
-&  :  inputs letter from the user based on the value of multiply in ascii<br></p>
+&  :  inputs letter from the user based on the value of multiply in ascii. Also accepts dottp values(look at the next thing to understand) as time to run in deciseconds, unless time to run is 0 where it expects 1 character no matter the time taken<br></p>
 
 
 ## 7) ^ and *
