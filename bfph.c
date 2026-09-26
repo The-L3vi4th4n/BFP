@@ -199,27 +199,13 @@ int main(int args, char *argv[]){
 		}
 		data[i] = (to_base(data[i],i,multiply,strip) + strip[ptr]) % 255 + rot;
 		if (data[i]==('<'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int k=0; k<multiply; k++){
-				ptr--;
-				if (ptr<0){
-					ptr=size-1;
-				}
-			}
+			ptr=(ptr-multiply)%size;
 		} else if (data[i]==('>'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int k=0; k<multiply; k++){
-				ptr++;
-				if (ptr>=size){
-					ptr=0;
-				}
-			}
+			ptr=(ptr+multiply)%size;
 		} else if (data[i]==('+'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int k=0; k<multiply; k++){
-				strip[ptr]++;
-			}
+			strip[ptr]+=multiply;
 		} else if (data[i]==('-'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int k=0; k<multiply; k++){
-				strip[ptr]--;
-			}
+			strip[ptr]-=multiply;
 		} else if (data[i]==('.'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
 			letter = (unsigned char)strip[ptr];
 			for (int k=0; k<multiply; k++){

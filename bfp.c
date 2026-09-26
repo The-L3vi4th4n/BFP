@@ -168,27 +168,13 @@ int main(int args, char *argv[]) {
 
 	while (i < length) {
 		if (data[i] == '<') {
-			for (int k = 0; k < multiply; k++) {
-				ptr--;
-				if (ptr < 0) {
-					ptr = size - 1;
-				}
-			}
+			ptr=(ptr-multiply)%size;
 		} else if (data[i] == '>') {
-			for (int k = 0; k < multiply; k++) {
-				ptr++;
-				if (ptr >= size) {
-					ptr = 0;
-				}
-			}
+			ptr=(ptr+multiply)%size;
 		} else if (data[i] == '+') {
-			for (int k = 0; k < multiply; k++) {
-				strip[ptr]++;
-			}
+			strip[ptr]+=multiply;
 		} else if (data[i] == '-') {
-			for (int k = 0; k < multiply; k++) {
-				strip[ptr]--;
-			}
+			strip[ptr]-=multiply;
 		} else if (data[i] == '.') {
 			letter = (unsigned char)strip[ptr];
 			for (int k = 0; k < multiply; k++) {
