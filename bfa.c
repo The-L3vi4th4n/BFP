@@ -63,21 +63,20 @@ int main(int args, char *argv[]){
 	unsigned int i = 0;
 	int *table = malloc((length + 1)*4);
 	int *temp = malloc((length + 1)*4);
-	int tempPos = 0;
 	if (!table || !temp){
 		printf("the table couldn't me loaded\n");
 		exit(1);
 	}
 	memset(table, 0, (length + 1)*4);
-	memset(temp, 0, (length + 1)*4);
 	while (i<length){
 		switch (data[i]){
 			case '+':
 				{
 					int acc = 0;
 					int doc = i;
-					while (i<length && data[i]=='+'){
-						acc++;
+					while (i<length){ 
+						if (data[i]=='+') acc++;
+						else if (data[i]!='+' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
@@ -90,12 +89,12 @@ int main(int args, char *argv[]){
 				{
 					int acc = 0;
 					int doc = i;
-					while (i<length && data[i]=='-'){
-						acc++;
+					while (i<length){ 
+						if (data[i]=='-') acc++;
+						else if (data[i]!='-' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					data[doc]=' ';
 					table[doc]=i-1;
 					data[i-1]='-';
 					table[i-1]=acc;
@@ -105,12 +104,12 @@ int main(int args, char *argv[]){
 				{
 					int acc = 0;
 					int doc = i;
-					while (i<length && data[i]=='<'){
-						acc++;
+					while (i<length){ 
+						if (data[i]=='<') acc++;
+						else if (data[i]!='<' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					data[doc]=' ';
 					table[doc]=i-1;
 					data[i-1]='<';
 					table[i-1]=acc;
@@ -120,18 +119,50 @@ int main(int args, char *argv[]){
 				{
 					int acc = 0;
 					int doc = i;
-					while (i<length && data[i]=='>'){
-						acc++;
+					while (i<length){ 
+						if (data[i]=='>') acc++;
+						else if (data[i]!='>' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					data[doc]=' ';
 					table[doc]=i-1;
 					data[i-1]='>';
 					table[i-1]=acc;
 				}
 				break;
-			case'[':
+			default:
+				i++;
+				break;
+		}
+	}
+
+	int ln = 0;
+	int rmE = 0;
+	int adE = 0;
+	memset(temp, 0, (length + 1)*4);
+
+	i = 0;
+
+	while (i < length){
+		int tpe = (data[i]=='+' || data[i]=='-' || data[i]=='>' || data[i]=='<' || data[i]=='[' || data[i]==']' || data[i]=='.' || data[i]==',') ? 1 : 0;
+		if (tpe) {
+			data[ln] = data[i];
+			table[ln] = table[i];
+			ln++;
+		} 
+		i++;
+	}
+
+	data[ln]='\0';
+	length = ln;
+
+	memset(temp, 0, (length + 1)*4);
+	int tempPos = 0;
+	i = 0;
+
+	while (i < length){
+		switch (data[i]){
+			case '[':
 				{
 					temp[tempPos]=i;
 					tempPos++;
@@ -148,8 +179,10 @@ int main(int args, char *argv[]){
 				}
 				break;
 			default:
-				i++;
-				break;
+				{
+					i++;
+					break;
+				}
 		}
 	}
 
@@ -159,22 +192,20 @@ int main(int args, char *argv[]){
 	int acc = 0;
 
 	while(i < length){
-		if (i+2 < length){
-			if (data[i]=='[' && (data[i+1]=='+' || data[i+1]=='-') && data[i+2]==']'){
+		if (i+2 < length && data[i]=='[' && data[i+2]==']'){
+			if (data[i+1]=='+' || data[i+1]=='-'){
 				strip[ptr]=0;
 				i+=3;
 				continue;
-			} else if (data[i]=='[' && data[i+1]=='<' && data[i+2]==']'){
+			} else if (data[i+1]=='<'){
 				while (strip[ptr]!=0){
-					ptr--;
-					if (ptr<0) ptr+=size;
+					ptr=(ptr - (table[i+1] % size) + size) % size;
 				}
 				i+=3;
 				continue;
-			} else if (data[i]=='[' && data[i+1]=='>' && data[i+2]==']'){
+			} else if (data[i+1]=='>'){
 				while (strip[ptr]!=0){
-					ptr++;
-					if (ptr>=size) ptr=0;
+					ptr=(ptr + (table[i+1] % size)) % size;
 				}
 				i+=3;
 				continue;
@@ -188,13 +219,13 @@ int main(int args, char *argv[]){
 				continue;
 			case '<':
 				{
-					ptr-=table[i];
+					ptr = (ptr - (table[i] % size) + size) % size;
 					acc = 0;
 					i++;
 					continue;
 				} 
 			case '>':{
-					 ptr+=table[i];
+					 ptr = (ptr + (table[i] % size)) % size;
 					 acc = 0;
 					 i++;
 					 continue;
@@ -215,6 +246,7 @@ int main(int args, char *argv[]){
 			case '.':
 				 {
 					 printf("%c",(unsigned char)strip[ptr]);
+					 fflush(stdout);
 					 i++;
 					 continue;
 				 } 
