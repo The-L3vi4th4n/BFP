@@ -71,55 +71,35 @@ int main(int args, char *argv[]){
 	while (i<length){
 		switch (data[i]){
 			case '+':
-				{
-					int acc = 0;
-					while (i<length){ 
-						if (data[i]=='+') acc++;
-						else if (data[i]!='+' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
-						data[i]=' ';
-						i++;
-					} 
-					data[i-1]='+';
-					table[i-1]=acc;
-				}
-				break;
 			case '-':
 				{
 					int acc = 0;
 					while (i<length){ 
-						if (data[i]=='-') acc++;
-						else if (data[i]!='-' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
+						if (data[i]=='+') acc++;
+						else if (data[i]=='-') acc--;
+						else if (data[i]!='+' && data[i]!='-' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					data[i-1]='-';
-					table[i-1]=acc;
+					if (acc>=0) data[i-1]='+';
+					else data[i-1]='-';
+					table[i-1]=abs(acc);
 				}
 				break;
 			case '<':
-				{
-					int acc = 0;
-					while (i<length){ 
-						if (data[i]=='<') acc++;
-						else if (data[i]!='<' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
-						data[i]=' ';
-						i++;
-					} 
-					data[i-1]='<';
-					table[i-1]=acc;
-				}
-				break;
 			case '>':
 				{
 					int acc = 0;
 					while (i<length){ 
-						if (data[i]=='>') acc++;
-						else if (data[i]!='>' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
+						if (data[i]=='<') acc++;
+						else if (data[i]=='>') acc--;
+						else if (data[i]!='<' && data[i]!='>' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					data[i-1]='>';
-					table[i-1]=acc;
+					if (acc>=0) data[i-1]='<';
+					else data[i-1]='>';
+					table[i-1]=abs(acc);
 				}
 				break;
 			default:
@@ -171,8 +151,8 @@ int main(int args, char *argv[]){
 			default:
 				{
 					i++;
-					break;
 				}
+				break;
 		}
 	}
 
