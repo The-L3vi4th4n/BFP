@@ -73,14 +73,12 @@ int main(int args, char *argv[]){
 			case '+':
 				{
 					int acc = 0;
-					int doc = i;
 					while (i<length){ 
 						if (data[i]=='+') acc++;
 						else if (data[i]!='+' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					table[doc]=i-1;
 					data[i-1]='+';
 					table[i-1]=acc;
 				}
@@ -88,14 +86,12 @@ int main(int args, char *argv[]){
 			case '-':
 				{
 					int acc = 0;
-					int doc = i;
 					while (i<length){ 
 						if (data[i]=='-') acc++;
 						else if (data[i]!='-' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					table[doc]=i-1;
 					data[i-1]='-';
 					table[i-1]=acc;
 				}
@@ -103,14 +99,12 @@ int main(int args, char *argv[]){
 			case '<':
 				{
 					int acc = 0;
-					int doc = i;
 					while (i<length){ 
 						if (data[i]=='<') acc++;
 						else if (data[i]!='<' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					table[doc]=i-1;
 					data[i-1]='<';
 					table[i-1]=acc;
 				}
@@ -118,14 +112,12 @@ int main(int args, char *argv[]){
 			case '>':
 				{
 					int acc = 0;
-					int doc = i;
 					while (i<length){ 
 						if (data[i]=='>') acc++;
 						else if (data[i]!='>' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
 						data[i]=' ';
 						i++;
 					} 
-					table[doc]=i-1;
 					data[i-1]='>';
 					table[i-1]=acc;
 				}
@@ -137,8 +129,6 @@ int main(int args, char *argv[]){
 	}
 
 	int ln = 0;
-	int rmE = 0;
-	int adE = 0;
 	memset(temp, 0, (length + 1)*4);
 
 	i = 0;
@@ -189,7 +179,6 @@ int main(int args, char *argv[]){
 	int ptr = 0;
 	i = 0;
 	char input = '\0';
-	int acc = 0;
 
 	while(i < length){
 		if (i+2 < length && data[i]=='[' && data[i+2]==']'){
@@ -220,26 +209,22 @@ int main(int args, char *argv[]){
 			case '<':
 				{
 					ptr = (ptr - (table[i] % size) + size) % size;
-					acc = 0;
 					i++;
 					continue;
 				} 
 			case '>':{
 					 ptr = (ptr + (table[i] % size)) % size;
-					 acc = 0;
 					 i++;
 					 continue;
 				 }
 			case '+':{
 					 strip[ptr]+=table[i];
-					 acc = 0;
 					 i++;
 					 continue;
 				 } 
 			case '-':
 				 {
 					 strip[ptr]-=table[i];
-					 acc = 0;
 					 i++;
 					 continue;
 				 }
