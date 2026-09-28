@@ -62,7 +62,7 @@ int main(int args, char *argv[]){
 
 	unsigned int i = 0;
 	int *table = malloc((length + 1)*4);
-	int *temp = malloc((length + 1)*4);
+	int *temp = malloc((BASE_STRIP + 1)*4);
 	if (!table || !temp){
 		printf("the table couldn't me loaded\n");
 		exit(1);
@@ -169,7 +169,121 @@ int main(int args, char *argv[]){
 	data[ln]='\0';
 	length = ln;
 
-	memset(temp, 0, (length + 1)*4);
+	i=0;
+	memset(temp, 0, (BASE_STRIP + 1)*4);
+
+	while (i < length){
+		if (data[i]=='['){
+			int nxt = 1;
+			int j = i+1;
+			int offset = 0;
+			int ns = 0;
+			while (j<length){
+				if (data[j]=='[') {
+					nxt++;
+					ns=1;
+				}
+				else if (data[j]==']') nxt--;
+				else if (data[j]=='<') offset-=table[j];
+				else if (data[j]=='>') offset+=table[j];
+				if (nxt==0) break;
+				j++;
+			}
+			if (ns==0){
+				if (offset==0){
+					int hlf = BASE_STRIP*2;
+					int loc = 0;
+					int lqc = 0;
+					int mx = hlf;
+					int mn = hlf;
+					int ext = 0;
+					for (int k = i; k<j; k++){
+						if (data[k]=='>'){
+							loc+=table[k];
+						} else if (data[k]=='<') loc-=table[k];
+
+						lqc = (loc + hlf)%length;
+
+						if (data[k]=='+') temp[lqc]+=table[k];
+						else if (data[k]=='-') temp[lqc]-=table[k];
+						else if (data[k]=='.' || data[k]==',') ext=1;
+						if ((data[k]=='+' || data[k]=='-') && lqc>mx) mx=lqc;
+						if ((data[k]=='+' || data[k]=='-') && lqc<mn) mn=lqc;
+					}
+
+					if (ext==0 && temp[hlf]!=0){
+						data[i]='c';
+						table[i]=temp[hlf];
+						i++;
+						loc=hlf;
+						for (int k=mn; k<=mx; k++){
+							printf("loc -> %d\n", loc);
+							if (k==hlf) continue;
+							if (k>loc){
+								data[i]='>';
+								table[i]=abs(k-loc);
+								i++;
+								loc=k;
+							} else if (k<loc){
+								data[i]='<';
+								table[i]=abs(loc-k);
+								i++;
+								loc=k;
+							}
+							if (temp[k]>0){
+								data[i]='p';
+								table[i]=temp[k];
+								i++;
+							} else if (temp[k]<0){
+								data[i]='s';
+								table[i]=abs(temp[k]);
+								i++;
+							}
+						}
+						if (hlf<loc){
+							data[i]='<';
+							table[i]=abs(hlf-loc);
+							i++;
+						} else if (hlf>loc){
+							data[i]='>';
+							table[i]=abs(loc-hlf);
+							i++;
+						}
+						while (i<=j){
+							data[i]=' ';
+							i++;
+						}
+						for (int k=mn; k<=mx; k++){
+							temp[k]=0;
+						}
+					}
+
+					i++;
+					continue;
+				}
+			}
+		}
+		i++;
+	}
+
+
+	ln = 0;
+	i = 0;
+
+	while (i < length){
+		int tpe = (data[i]!='\n' && data[i]!='\t' && data[i]!=' ') ? 1 : 0;
+		if (tpe) {
+			data[ln] = data[i];
+			table[ln] = table[i];
+			ln++;
+		} 
+		i++;
+	}
+
+	data[ln]='\0';
+	length = ln;
+
+	memset(temp, 0, (BASE_STRIP + 1)*4);
 	int tempPos = 0;
 	i = 0;
 
@@ -199,12 +313,38 @@ int main(int args, char *argv[]){
 		}
 	}
 
+	data[ln]='\0';
+	length = ln;
+
 	int ptr = 0;
 	i = 0;
 	char input = '\0';
+	int multiply = 0;
 
 	while(i < length){
 		switch (data[i]){
+			case 'c':
+				{
+					multiply=0;
+					while (strip[ptr]!=0){
+						strip[ptr]+=table[i];
+						multiply++;
+					}
+					i++;
+					continue;
+				}
+			case 'p':
+				{
+					strip[ptr]+=table[i]*multiply;
+					i++;
+					continue;
+				}
+			case 's':
+				{
+					strip[ptr]-=table[i]*multiply;
+					i++;
+					continue;
+				}
 			case 'e':
 				{
 					strip[ptr]=0;
