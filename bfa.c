@@ -270,7 +270,7 @@ int main(int args, char *argv[]){
 			case '[': 
 				 {
 					 if (strip[ptr]==0){
-						 i=table[i];
+						 i=table[i]+1;
 					 } else {
 						 i++;
 					 }
@@ -279,7 +279,7 @@ int main(int args, char *argv[]){
 			case ']': 
 				 { 
 					 if (strip[ptr]!=0){
-						 i=table[i];
+						 i=table[i]+1;
 					 } else {
 						 i++;
 					 }
