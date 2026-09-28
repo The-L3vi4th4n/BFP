@@ -7,14 +7,12 @@
 #ifdef _WIN32
 #include <conio.h>
 #include <windows.h>
-#define usleep(time) Sleep((time)/1000)
-int getch() {
-	return _getch();
-}
+#define usleep(time) Sleep((time) / 1000)
+int getch() { return _getch(); }
 #else
 
-#include <unistd.h>
 #include <termios.h>
+#include <unistd.h>
 
 char getch(int vmin, int vtime) {
 	char buf = 0;
@@ -28,11 +26,11 @@ char getch(int vmin, int vtime) {
 	if (tcsetattr(0, TCSANOW, &old) < 0)
 		perror("tcsetattr ICANON");
 	if (read(0, &buf, 1) < 0)
-		perror ("read()");
+		perror("read()");
 	old.c_lflag |= ICANON;
 	old.c_lflag |= ECHO;
 	if (tcsetattr(0, TCSADRAIN, &old) < 0)
-		perror ("tcsetattr ~ICANON");
+		perror("tcsetattr ~ICANON");
 	return (buf);
 }
 
@@ -43,13 +41,13 @@ char getch(int vmin, int vtime) {
 #endif
 
 #ifndef __APPLE__
-unsigned int arc4random_uniform(unsigned int x){
-	static int seedy=0;
-	if (seedy==0){
+unsigned int arc4random_uniform(unsigned int x) {
+	static int seedy = 0;
+	if (seedy == 0) {
 		srand(time(NULL));
-		seedy=1;
+		seedy = 1;
 	}
-	return(rand()%x);
+	return (rand() % x);
 }
 #endif
 
@@ -82,7 +80,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 int to_base(int n,int i,int multiply, int *strip);
 int bt(int n, int i);
 
-int main(int args, char *argv[]){
+int main(int args, char *argv[]) {
 	int size = BASE_STRIP;
 
 	char *program_file = NULL;
@@ -123,12 +121,13 @@ int main(int args, char *argv[]){
 			printf("output file can't be opened\n");
 			exit(1);
 		}
-		fprintf(l, "%p\n", (void*)&strip[0]);
+		fprintf(l, "%p\n", (void *)&strip[0]);
 		fclose(l);
 	}
 
 	FILE *f = fopen(program_file, "r");
-	if (!f) {                                                                                                                                                                                  printf("file can't be opened: %s\n", program_file);
+	if (!f) {
+		printf("file can't be opened: %s\n", program_file);
 		exit(1);
 	}
 
@@ -156,30 +155,26 @@ int main(int args, char *argv[]){
 	unsigned int *lp = malloc(sizeof(unsigned int) * PTR_MAX);
 	memset(lp, 0, PTR_MAX * sizeof(unsigned int));
 	unsigned int dottp = 0;
-	unsigned int multiply = 1;
-	unsigned int nl_multiply = 0;
+	unsigned multiply = 1;
+	unsigned nl_multiply = 0;
 	unsigned int io = 0;
 	unsigned int pos = 0;
 	unsigned int dpos = 0;
 	unsigned int depth = 0;
 	unsigned char input = '\0';
+
 	int *br_o;
 
-	unsigned rbr_multiply = 0;
-	unsigned int rbr = 0;
-
-	unsigned sbr_multiply = 0;
-	unsigned int sbr = 0;
+	unsigned sbr_multiply = 1;
 
 	unsigned char letter = '\0';
 	int range = 0;
 	int inputValue = 0;
 
-	int use_ptr_mode=0;
-	int index=0;
+	int use_ptr_mode = 0;
+	int index = 0;
 
-
-	while(i < length){
+	while (i < length) {
 		its=rot;
 		while (its>0){
 			dir=(rot%3)-1;
@@ -193,132 +188,141 @@ int main(int args, char *argv[]){
 			}
 			its--;
 		}
-
 		if (data[i] <= ('0' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply)) || data[i] >= ('9' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
 			multiply=bt(multiply,i);
 		}
 		data[i] = (to_base(data[i],i,multiply,strip) + strip[ptr]) % 255 + rot;
-		if (data[i]==('<'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		if (data[i] == ('<' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			ptr=(ptr-multiply)%size;
-		} else if (data[i]==('>'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('>' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			ptr=(ptr+multiply)%size;
-		} else if (data[i]==('+'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('+' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			strip[ptr]+=multiply;
-		} else if (data[i]==('-'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('-' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			strip[ptr]-=multiply;
-		} else if (data[i]==('.'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('.' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			letter = (unsigned char)strip[ptr];
-			for (int k=0; k<multiply; k++){
-				printf("%c",(unsigned char)letter);
+			for (int k = 0; k < multiply; k++) {
+				printf("%c", (unsigned char)letter);
 			}
-		} else if (data[i]==(','- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int k=0; k<multiply; k++){
-				printf("%d",strip[ptr]);
+		} else if (data[i] == (',' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			for (int k = 0; k < multiply; k++) {
+				printf("%d", strip[ptr]);
 			}
-		} else if (data[i]==(':'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			pvptr=ptr;
-			ptr=0;
-		} else if (data[i]==(';'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			pvptr=ptr;
-			ptr=size-1;
-		} else if (data[i]==('~'- ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			ptr=pvptr;
-		} else if (data[i]==('_' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == (':' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			pvptr = ptr;
+			ptr = 0;
+		} else if (data[i] == (';' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			pvptr = ptr;
+			ptr = size - 1;
+		} else if (data[i] == ('~' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			ptr = pvptr;
+		} else if (data[i] == ('_' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			fflush(stdout);
-		} else if (data[i]=='%'){
-			for (int k=0; k<multiply; k++){
+		} else if (data[i] == ('%' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			for (int k = 0; k < multiply; k++) {
 				puts("");
 			}
-		} else if (data[i]==('^' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			if (multiply < PTR_MAX && multiply > 0){
-				tpptr[multiply-1] = i;
+		} else if (data[i] == ('^' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			if (multiply < PTR_MAX && multiply > 0) {
+				tpptr[multiply - 1] = i;
 			}
-		} else if (data[i]==('*' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			if (multiply < PTR_MAX && multiply > 0){
-				i = tpptr[multiply-1];
+		} else if (data[i] == ('*' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			if (multiply < PTR_MAX && multiply > 0) {
+				i = tpptr[multiply - 1];
 				continue;
 			}
-		} else if (data[i]==('@' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			usleep(multiply*1000);
-		} else if (data[i]==('!' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('@' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			usleep(multiply * 1000);
+		} else if (data[i] == ('!' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			printf("\033[2J\033[H");
 			fflush(stdout);
-		} else if (data[i]==('|' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('|' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			if (use_ptr_mode) {
 				index = ptr;
 			} else {
-				index=((multiply-nl_multiply-1)%size+size)%size;
-				nl_multiply = strip[index];
+				index = ((multiply - nl_multiply - 1) % size + size) % size;
 			}
-		} else if (data[i]==('`' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+			nl_multiply = strip[index];
+		} else if (data[i] == ('`' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			break;
-		} else if (data[i]==('\\' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			use_ptr_mode=0;
-			nl_multiply = 0;
-		} else if (data[i]==('?' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			if (multiply < PTR_MAX && multiply > 0){
-				dottp = multiply-1;
+		} else if (data[i] == ('\\' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			if (use_ptr_mode != 0) {
+				use_ptr_mode = 0;
+				nl_multiply = 0;
+			} else {
+				i++;
+				while (i < length && data[i] != ('\\' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+					i++;
+				}
 			}
-		} else if (data[i]==('#' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			if (dottp < PTR_MAX){
+		} else if (data[i] == ('?' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			if (multiply < PTR_MAX && multiply > 0) {
+				dottp = multiply - 1;
+			}
+		} else if (data[i] == ('#' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			if (dottp < PTR_MAX) {
 				lp[dottp]++;
-				if (lp[dottp] < multiply){
+				if (lp[dottp] < multiply) {
 					i = tpptr[dottp];
 					continue;
 				} else {
 					lp[dottp] = 0;
 				}
 			}
-		} else if (data[i]==('$' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int j=0; j<multiply && ptr+j < size; j++){
-				if (scanf("%c",&input)==1){
-					strip[ptr+j]=(unsigned char)input;
+		} else if (data[i] == ('$' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			for (int j = 0; j < multiply && ptr + j < size; j++) {
+				if (scanf("%c", &input) == 1) {
+					strip[ptr + j] = (unsigned char)input;
 				} else {
-					strip[ptr+j]=0;
+					strip[ptr + j] = 0;
 				}
 			}
 			while ((inputValue = getchar()) != '\n' && inputValue != EOF);
-		} else if (data[i]==('&' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			for (int j=0; j<multiply && ptr+j < size; j++){
-				if (dottp!=0) input=getch(0,dottp);
-				else input=getch(1,0);
-				strip[ptr+j]=(unsigned char)input;
+		} else if (data[i] == ('&' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			for (int j = 0; j < multiply && ptr + j < size; j++) {
+				if (dottp!=0) input = getch(0, dottp);
+				else input = getch(1, 0);
+				strip[ptr + j] = (unsigned char)input;
 			}
-		} else if (data[i]==('=' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('=' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			range = multiply;
-			if (range <= 0) range = 1;
+			if (range <= 0)
+				range = 1;
 			strip[ptr] = arc4random_uniform(range);
-		} else if (data[i]==('(' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+		} else if (data[i] == ('(' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			br_o = rbracket(strip, i, multiply, size, data, ptr);
-			rbr = 1;
-			rbr_multiply = br_o[0];
+			multiply = br_o[0];
 			i = br_o[1];
-		} else if (data[i]==('[' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
+			continue;
+		} else if (data[i] == ('[' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			br_o = sbracket(strip, i, multiply, size, data, ptr);
-			sbr = 1;
-			sbr_multiply = br_o[0];
+			if (sbr_multiply!=0) sbr_multiply = br_o[0];
+			multiply = 1;
+			multiply += nl_multiply;
 			i = br_o[1];
-		} else if (data[i]==('{' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			if (sbr_multiply == 0 && sbr == 1){
-				sbr = 0;
+			continue;
+		} else if (data[i] == ('{' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			if (sbr_multiply == 0) {
+				sbr_multiply = 1;
 				i++;
 				continue;
 			} else {
 				io = i;
 				pos = i;
 				depth = 0;
-				for (int j = 1; pos < length; j++){
+				for (int j = 1; pos < length; j++) {
 					pos = j + i;
-					if (data[pos] == '}' && depth == 0){
+					if (data[pos] == ('}' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply)) && depth == 0) {
 						dpos = pos;
 						break;
-					} else if (data[pos] == '}' && depth > 0){
+					} else if (data[pos] == ('}' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply)) && depth > 0) {
 						depth--;
-					} else if (data[pos] == '{'){
+					} else if (data[pos] == ('{' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 						depth++;
 					}
 				}
-				if (io == dpos){
+				if (io == dpos) {
 					printf("error, no closing bracket at line %d\n", i);
 					exit(1);
 				} else {
@@ -327,7 +331,7 @@ int main(int args, char *argv[]){
 				}
 			}
 		} else if (data[i] == ('\'' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
-			if (multiply - 1 == 0){
+			if (multiply - 1 == 0) {
 				memset(strip, 0, size * sizeof(int));
 			} else {
 				for (int k = 0; k < multiply - 1 && ptr + k < size; k++) {
@@ -335,15 +339,15 @@ int main(int args, char *argv[]){
 				}
 			}
 		} else if (data[i] == ('"' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
-			if (multiply - 1 == 0){
+			if (multiply - 1 == 0) {
 				memset(strip, dottp, size * sizeof(int));
 			} else {
 				for (int k = 0; k < multiply - 1 && ptr + k < size; k++) {
 					strip[ptr + k] = dottp;
 				}
 			}
-		} else if (data[i]==('/' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))){
-			use_ptr_mode=1;
+		} else if (data[i] == ('/' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
+			use_ptr_mode = 1;
 		}
 
 		digit = to_base(data[i] - '0',i,multiply,strip);
@@ -354,10 +358,6 @@ int main(int args, char *argv[]){
 			multiply += (digit-nl_multiply);
 		}
 
-		if (rbr){
-			multiply = rbr_multiply;
-			rbr = 0;
-		}
 		rot = (rot + 1 + ((unsigned char)data[i]))*37 % 256;
 		rot = (rot^0x9e3779b97f4a7c15ULL)*37 % 256;
 		rot = ((rot >> 3) | (rot << 5))*37 % 256;
@@ -372,18 +372,18 @@ int main(int args, char *argv[]){
 	return 0;
 }
 
-int *sbracket(int *strip, int location, int multiply, int length, char data[], int ptr) {
+int *sbracket(int *strip, int location, int multiply, int length, char data[],int ptr) {
 	static int retd[2];
 	int ret = 0;
 	int dottp = 0;
 	int mult = 1;
-	int nl_multiply=0;
+	int nl_multiply = 0;
 	int val1 = 0;
 	location++;
 	int *nested;
 	int mode = 0;
 	int separator_hit = 0;
-	int use_ptr_mode=0;
+	int use_ptr_mode = 0;
 	int index = 0;
 
 	while (location < length) {
@@ -417,16 +417,30 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 			ret += nested[0];
 			location = nested[1];
 			continue;
+		} else if (data[location] == ('<' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			for (int k = 0; k < mult; k++) {
+				ptr--;
+				if (ptr < 0) {
+					ptr = BASE_STRIP - 1;
+				}
+			}
+		} else if (data[location] == ('>' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			for (int k = 0; k < mult; k++) {
+				ptr++;
+				if (ptr >= BASE_STRIP) {
+					ptr = 0;
+				}
+			}
 		} else if (data[location] == ('|' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			if (use_ptr_mode) {
 				index = ptr;
 			} else {
-				index=((mult-nl_multiply-1)%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
+				index = ((mult - nl_multiply - 1) % BASE_STRIP + BASE_STRIP) % BASE_STRIP;
 			}
 			nl_multiply = strip[index];
-		} else if (data[location]==('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
-			if (mult < PTR_MAX && mult > 0){
-				dottp = mult-1;
+		} else if (data[location] == ('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			if (mult < PTR_MAX && mult > 0) {
+				dottp = mult - 1;
 			}
 		} else if (data[location] == ('+' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			ret += mult;
@@ -460,10 +474,18 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 			separator_hit = 1;
 			location++;
 			continue;
-		}  else if (data[location]==('/' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
-			use_ptr_mode=1;
-		} else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
-			use_ptr_mode=0;
+		} else if (data[location] == ('/' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			use_ptr_mode = 1;
+		} else if (data[location] == ('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			if (use_ptr_mode != 0) {
+				use_ptr_mode = 0;
+				nl_multiply = 0;
+			} else {
+				location++;
+				while (location < length && data[location] != ('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+					location++;
+				}
+			}
 		}
 		digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
 		if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
@@ -480,7 +502,7 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 	}
 
 	if (!separator_hit) {
-		retd[0] = (ret != 0) ? 0 : 1;
+		retd[0] = (ret != 1) ? 0 : 1;
 	} else if (mode == 0) {
 		retd[0] = (val1 == ret) ? 0 : 1;
 	} else if (mode == 1) {
@@ -495,15 +517,15 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[], i
 	return retd;
 }
 
-int *rbracket(int *strip, int location, int multiply, int length, char data[], int ptr){
+int *rbracket(int *strip, int location, int multiply, int length, char data[],int ptr) {
 	static int retd[2];
-	int dottp=0;
+	int dottp = 0;
 	int ret = 0;
 	int mult = 1;
-	int nl_multiply=0;
+	int nl_multiply = 0;
 	location++;
 	int *nested;
-	int use_ptr_mode=0;
+	int use_ptr_mode = 0;
 	int index = 0;
 
 	while (location < length) {
@@ -532,26 +554,51 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[], i
 			mult = nested[0];
 			location = nested[1];
 			continue;
+		} else if (data[location] == ('<' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			for (int k = 0; k < mult; k++) {
+				ptr--;
+				if (ptr < 0) {
+					ptr = BASE_STRIP - 1;
+				}
+			}
+		} else if (data[location] == ('>' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			for (int k = 0; k < mult; k++) {
+				ptr++;
+				if (ptr >= BASE_STRIP) {
+					ptr = 0;
+				}
+			}
 		} else if (data[location] == ('|' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			if (use_ptr_mode) {
 				index = ptr;
 			} else {
-				index=((mult-nl_multiply-1)%BASE_STRIP+BASE_STRIP)%BASE_STRIP;
+				index = ((mult - nl_multiply - 1) % BASE_STRIP + BASE_STRIP) % BASE_STRIP;
 			}
 			nl_multiply = strip[index];
 		} else if (data[location] == ('+' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			ret += mult;
-		} else if (data[location]==('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
-			if (mult < PTR_MAX && mult > 0){
-				dottp = mult-1;
+		} else if (data[location] == ('*' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			ret *= mult;
+		} else if (data[location] == ('?' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			if (mult < PTR_MAX && mult > 0) {
+				dottp = mult - 1;
 			}
 		} else if (data[location] == ('-' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
 			ret -= mult;
-		} else if (data[location]==('/' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
-			use_ptr_mode=1;
-		} else if (data[location]==('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))){
-			use_ptr_mode=0;
-			nl_multiply = 0;
+		} else if (data[location] == ('%' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			ret /= mult;
+		} else if (data[location] == ('/' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			use_ptr_mode = 1;
+		} else if (data[location] == ('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+			if (use_ptr_mode != 0) {
+				use_ptr_mode = 0;
+				nl_multiply = 0;
+			} else {
+				location++;
+				while (location < length && data[location] != ('\\' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
+					location++;
+				}
+			}
 		}
 		digit = to_base(data[location] - '0',location,mult+multiply,strip) % 255 + 32;
 		if (data[location] >= ('0' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply)) && data[location] <= ('9' - ((unsigned char)(location) ^ rot) + (unsigned char)(mult+multiply))) {
