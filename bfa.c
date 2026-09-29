@@ -178,7 +178,6 @@ int main(int args, char *argv[]){
 	length = ln;
 
 	i=0;
-	memset(temp, 0, (BASE_STRIP + 1)*(sizeof(int)));
 
 	while (i < length){
 		if (data[i]=='['){
@@ -186,6 +185,7 @@ int main(int args, char *argv[]){
 			int j = i+1;
 			int offset = 0;
 			int ns = 0;
+			int ext = 0;
 			while (j<length){
 				if (data[j]=='[') {
 					nxt++;
@@ -194,115 +194,50 @@ int main(int args, char *argv[]){
 				else if (data[j]==']') nxt--;
 				else if (data[j]=='<') offset-=table[j];
 				else if (data[j]=='>') offset+=table[j];
+				else if (data[j]=='.' || data[j]==',' || data[j]=='e' || data[j]=='m' || data[j]=='M') ext=1;
 				if (nxt==0) break;
 				j++;
 			}
-			if (ns==0){
+			if (ns==0 && ext==0){
 				if (offset==0){
-					int hlf = (BASE_STRIP+1)/2;
 					int loc = 0;
 					int lqc = 0;
-					int mx = hlf;
-					int mn = hlf;
-					int ext = 0;
 					for (int k = i; k<j; k++){
-						if (data[k]=='>'){
-							loc+=table[k];
-						} else if (data[k]=='<') loc-=table[k];
-
-						lqc = (loc + hlf)%length;
-
-						if (data[k]=='+') temp[lqc]+=table[k];
-						else if (data[k]=='-') temp[lqc]-=table[k];
-						else if (data[k]=='.' || data[k]==',') ext=1;
-						if ((data[k]=='+' || data[k]=='-') && lqc>mx) mx=lqc;
-						if ((data[k]=='+' || data[k]=='-') && lqc<mn) mn=lqc;
+						if (data[k]=='>') loc+=table[k];
+						else if (data[k]=='<') loc-=table[k];
+						else if (data[k]=='+'){
+							if (loc==0){
+								lqc+=table[k];
+								data[k]=' ';
+							} else {
+								data[k]='p';
+							}
+						}
+						else if (data[k]=='-'){
+							if (loc==0){
+								lqc-=table[k];
+								data[k]=' ';
+							} else {
+								data[k]='s';
+							}
+						}
 					}
-
-					if (ext==0 && temp[hlf]!=0){
-						data[i]='c';
-						table[i]=temp[hlf];
-						i++;
-						loc=hlf;
-						for (int k=mn; k<=mx; k++){
-							if (k==hlf) continue;
-							if (k>loc){
-								data[i]='>';
-								table[i]=abs(k-loc);
-								i++;
-								loc=k;
-							} else if (k<loc){
-								data[i]='<';
-								table[i]=abs(loc-k);
-								i++;
-								loc=k;
-							}
-							if (temp[k]>0){
-								data[i]='p';
-								table[i]=temp[k];
-								i++;
-							} else if (temp[k]<0){
-								data[i]='s';
-								table[i]=abs(temp[k]);
-								i++;
-							}
-						}
-						if (hlf<loc){
-							data[i]='<';
-							table[i]=abs(hlf-loc);
-							if (j+1<length){
-								if (data[j+1]=='>'){
-									table[i]-=table[j+1];
-									data[j+1]=' ';
-								}
-								else if (data[j+1]=='<'){
-									table[i]+=table[j+1];
-									data[j+1]=' ';
-								}
-								if (table[i]==0) data[i]=' ';
-								else if (table[i]<0){
-									table[i]=abs(table[i]);
-									data[i]='>';
-								}
-							}
-							i++;
-						} else if (hlf>loc){
-							data[i]='>';
-							table[i]=abs(loc-hlf); 
-							if (j+1<length){
-								if (data[j+1]=='>'){
-									table[i]+=table[j+1];
-									data[j+1]=' ';
-								}
-								else if (data[j+1]=='<'){
-									table[i]-=table[j+1];
-									data[j+1]=' ';
-								}
-								if (table[i]==0) data[i]=' ';
-								else if (table[i]<0){
-									table[i]=abs(table[i]);
-									data[i]='<';
-								}
-							}
-							i++;
-						}
-						while (i<=j){
-							data[i]=' ';
-							i++;
-						}
-						for (int k=mn; k<=mx; k++){
-							temp[k]=0;
-						}
-						continue;
-					}
+					data[i]='c';
+					table[i]=lqc;
+					data[j]=' ';
+					i=j;
+					continue;
 				}
 			}
 			table[i]=j;
 			table[j]=i;
+			if (ns==0){
+				i=j;
+				continue;
+			}
 		}
 		i++;
 	}
-
 
 	ln = 0;
 	i = 0;
@@ -310,6 +245,9 @@ int main(int args, char *argv[]){
 	while (i < length){
 		int tpe = (data[i]!='\n' && data[i]!='\t' && data[i]!=' ') ? 1 : 0;
 		if (tpe) {
+			if (data[i]=='[' || data[i]==']'){
+				table[table[i]]=ln;
+			}
 			data[ln] = data[i];
 			table[ln] = table[i];
 			ln++;
@@ -319,6 +257,66 @@ int main(int args, char *argv[]){
 
 	data[ln]='\0';
 	length = ln;
+
+	i=0;
+
+	while (i<length){
+		switch (data[i]){
+			case '+':
+			case '-':
+				{
+					int acc = 0;
+					while (i<length){ 
+						if (data[i]=='+') acc+=table[i];
+						else if (data[i]=='-') acc-=table[i];
+						else if (data[i]!='+' && data[i]!='-' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
+						data[i]=' ';
+						i++;
+					} 
+					if (acc>0) data[i-1]='+';
+					else if (acc<0) data[i-1]='-';
+					else data[i-1]=' ';
+					table[i-1]=abs(acc);
+				}
+				break;
+			case '<':
+			case '>':
+				{
+					int acc = 0;
+					while (i<length){ 
+						if (data[i]=='<') acc+=table[i];
+						else if (data[i]=='>') acc-=table[i];
+						else if (data[i]!='<' && data[i]!='>' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
+						data[i]=' ';
+						i++;
+					} 
+					if (acc>0) data[i-1]='<';
+					else if (acc<0) data[i-1]='>';
+					else data[i-1]=' ';
+					table[i-1]=abs(acc%size);
+				}
+				break;
+			default:
+				i++;
+				break;
+		}
+	}
+
+	ln = 0;
+	i = 0;
+
+	while (i < length){
+		int tpe = (data[i]!='\n' && data[i]!='\t' && data[i]!=' ') ? 1 : 0;
+		if (tpe) {
+			if (data[i]=='[' || data[i]==']'){
+				table[table[i]]=ln;
+			}
+			data[ln] = data[i];
+			table[ln] = table[i];
+			ln++;
+		} 
+		i++;
+	}
 
 	data[ln]='\0';
 	length = ln;
@@ -363,7 +361,6 @@ int main(int args, char *argv[]){
 				{
 					int mve = (table[i] % size);
 					while (strip[ptr]!=0){
-						//ptr=(ptr - mve + size) % size;
 						ptr-=mve;
 						if (ptr<0) ptr+=size;
 					}
@@ -376,7 +373,6 @@ int main(int args, char *argv[]){
 				{
 					int mve = (table[i] % size);
 					while (strip[ptr]!=0){
-						//ptr=(ptr + mve) % size;
 						ptr+=mve;
 						if (ptr>=size) ptr=ptr-size;
 					}
