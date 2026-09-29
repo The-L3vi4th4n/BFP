@@ -226,6 +226,47 @@ int main(int args, char *argv[]){
 					table[i]=lqc;
 					data[j]=' ';
 					i=j;
+					int k;
+					if (data[j-1]=='<' || data[j-1]=='>' && j-1>0) k=j-1;
+					else if (data[j-2]=='<' || data[j-2]=='>' && j-2>0) k=j-2;
+					if (k!=i){
+						if (data[i+1]=='<'){
+							data[i+1]=' ';
+							if (data[k]=='<') { 
+								table[k]+=table[i+1];
+							}
+							else if (data[k]=='>'){ 
+								table[k]-=table[i+1];
+								if (table[k]==0){
+									data[k]=' ';
+								} else if (table[k]<0){
+									table[k]=abs(table[k]);
+									data[k]='<';
+								} else if (table[k]>0){
+									table[j]=table[k];
+									data[k]='>';
+								}
+							}
+						} 
+						else if (data[i+1]=='>'){
+							data[i+1]=' ';
+							if (data[k]=='<') { 
+								table[k]-=table[i+1];
+								if (table[k]==0){
+									data[k]=' ';
+								} else if (table[k]<0){
+									table[k]=abs(table[k]);
+									data[k]='>';
+								}  else if (table[k]>0){
+									table[k]=table[k];
+									data[k]='<';
+								}
+							}
+							else if (data[k]=='>'){ 
+								table[k]+=table[i+1];
+							}
+						}
+					}
 					continue;
 				}
 			}
@@ -237,69 +278,6 @@ int main(int args, char *argv[]){
 			}
 		}
 		i++;
-	}
-
-	ln = 0;
-	i = 0;
-
-	while (i < length){
-		int tpe = (data[i]!='\n' && data[i]!='\t' && data[i]!=' ') ? 1 : 0;
-		if (tpe) {
-			if (data[i]=='[' || data[i]==']'){
-				table[table[i]]=ln;
-			}
-			data[ln] = data[i];
-			table[ln] = table[i];
-			ln++;
-		} 
-		i++;
-	}
-
-	data[ln]='\0';
-	length = ln;
-
-	i=0;
-
-	while (i<length){
-		switch (data[i]){
-			case '+':
-			case '-':
-				{
-					int acc = 0;
-					while (i<length){ 
-						if (data[i]=='+') acc+=table[i];
-						else if (data[i]=='-') acc-=table[i];
-						else if (data[i]!='+' && data[i]!='-' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
-						data[i]=' ';
-						i++;
-					} 
-					if (acc>0) data[i-1]='+';
-					else if (acc<0) data[i-1]='-';
-					else data[i-1]=' ';
-					table[i-1]=abs(acc);
-				}
-				break;
-			case '<':
-			case '>':
-				{
-					int acc = 0;
-					while (i<length){ 
-						if (data[i]=='<') acc+=table[i];
-						else if (data[i]=='>') acc-=table[i];
-						else if (data[i]!='<' && data[i]!='>' && data[i]!='\n' && data[i]!=' ' && data[i]!='\t') break;
-						data[i]=' ';
-						i++;
-					} 
-					if (acc>0) data[i-1]='<';
-					else if (acc<0) data[i-1]='>';
-					else data[i-1]=' ';
-					table[i-1]=abs(acc%size);
-				}
-				break;
-			default:
-				i++;
-				break;
-		}
 	}
 
 	ln = 0;
