@@ -10,9 +10,17 @@
 #define DEFAULT_PROGRAM NULL
 #endif
 
+#ifndef FLSH
+#define FLSH 64
+#endif
+
+unsigned char buffer[FLSH+1];
+
 int BASE_STRIP = DEFAULT_STRIP;
 
 int main(int args, char *argv[]){
+	memset(buffer, 0, FLSH+1);
+
 	int size = BASE_STRIP;
 
 	char *program_file = NULL;
@@ -61,13 +69,13 @@ int main(int args, char *argv[]){
 	data[length] = '\0';
 
 	unsigned int i = 0;
-	int *table = malloc((length + 1)*4);
-	int *temp = malloc((BASE_STRIP + 1)*4);
+	int *table = malloc((length + 1)*(sizeof(int)));
+	int *temp = malloc((BASE_STRIP + 1)*(sizeof(int)));
 	if (!table || !temp){
 		printf("the table couldn't me loaded\n");
 		exit(1);
 	}
-	memset(table, 0, (length + 1)*4);
+	memset(table, 0, (length + 1)*sizeof(int));
 	while (i<length){
 		switch (data[i]){
 			case '+':
@@ -170,7 +178,7 @@ int main(int args, char *argv[]){
 	length = ln;
 
 	i=0;
-	memset(temp, 0, (BASE_STRIP + 1)*4);
+	memset(temp, 0, (BASE_STRIP + 1)*(sizeof(int)));
 
 	while (i < length){
 		if (data[i]=='['){
@@ -191,7 +199,7 @@ int main(int args, char *argv[]){
 			}
 			if (ns==0){
 				if (offset==0){
-					int hlf = BASE_STRIP*2;
+					int hlf = (BASE_STRIP+1)/2;
 					int loc = 0;
 					int lqc = 0;
 					int mx = hlf;
@@ -217,7 +225,6 @@ int main(int args, char *argv[]){
 						i++;
 						loc=hlf;
 						for (int k=mn; k<=mx; k++){
-							printf("loc -> %d\n", loc);
 							if (k==hlf) continue;
 							if (k>loc){
 								data[i]='>';
@@ -243,10 +250,40 @@ int main(int args, char *argv[]){
 						if (hlf<loc){
 							data[i]='<';
 							table[i]=abs(hlf-loc);
+							if (j+1<length){
+								if (data[j+1]=='>'){
+									table[i]-=table[j+1];
+									data[j+1]=' ';
+								}
+								else if (data[j+1]=='<'){
+									table[i]+=table[j+1];
+									data[j+1]=' ';
+								}
+								if (table[i]==0) data[i]=' ';
+								else if (table[i]<0){
+									table[i]=abs(table[i]);
+									data[i]='>';
+								}
+							}
 							i++;
 						} else if (hlf>loc){
 							data[i]='>';
-							table[i]=abs(loc-hlf);
+							table[i]=abs(loc-hlf); 
+							if (j+1<length){
+								if (data[j+1]=='>'){
+									table[i]+=table[j+1];
+									data[j+1]=' ';
+								}
+								else if (data[j+1]=='<'){
+									table[i]-=table[j+1];
+									data[j+1]=' ';
+								}
+								if (table[i]==0) data[i]=' ';
+								else if (table[i]<0){
+									table[i]=abs(table[i]);
+									data[i]='<';
+								}
+							}
 							i++;
 						}
 						while (i<=j){
@@ -256,12 +293,12 @@ int main(int args, char *argv[]){
 						for (int k=mn; k<=mx; k++){
 							temp[k]=0;
 						}
+						continue;
 					}
-
-					i++;
-					continue;
 				}
 			}
+			table[i]=j;
+			table[j]=i;
 		}
 		i++;
 	}
@@ -283,36 +320,6 @@ int main(int args, char *argv[]){
 	data[ln]='\0';
 	length = ln;
 
-	memset(temp, 0, (BASE_STRIP + 1)*4);
-	int tempPos = 0;
-	i = 0;
-
-	while (i < length){
-		switch (data[i]){
-			case '[':
-				{
-					temp[tempPos]=i;
-					tempPos++;
-					i++;
-				}
-				break;
-			case ']':
-				{
-					tempPos--;
-					int curPos = temp[tempPos];
-					table[i]=curPos;
-					table[curPos]=i;
-					i++;
-				}
-				break;
-			default:
-				{
-					i++;
-				}
-				break;
-		}
-	}
-
 	data[ln]='\0';
 	length = ln;
 
@@ -320,6 +327,7 @@ int main(int args, char *argv[]){
 	i = 0;
 	char input = '\0';
 	int multiply = 0;
+	int flsh = 0;
 
 	while(i < length){
 		switch (data[i]){
@@ -402,8 +410,13 @@ int main(int args, char *argv[]){
 				 }
 			case '.':
 				 {
-					 printf("%c",(unsigned char)strip[ptr]);
-					 fflush(stdout);
+					 buffer[flsh]=strip[ptr];
+					 flsh++;
+					 if (flsh==FLSH || strip[ptr]=='\n'){
+						 fwrite(buffer, 1, flsh, stdout);
+						 fflush(stdout);
+						 flsh=0;
+					 }
 					 i++;
 					 continue;
 				 } 
@@ -427,6 +440,8 @@ int main(int args, char *argv[]){
 				 }
 			case ',':
 				 {
+					 printf("%s", buffer);
+					 flsh=0;
 					 input = getchar();
 					 if (input!=EOF){
 						 strip[ptr]=(unsigned char)input;
