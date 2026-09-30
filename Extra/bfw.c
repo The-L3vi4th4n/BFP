@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <emscripten.h>
 
 #ifndef DEFAULT_STRIP
 #define DEFAULT_STRIP 30000
@@ -393,6 +394,7 @@ int main(int args, char *argv[]){
 					 } else {
 						 strip[ptr]=0;
 					 }
+					 emscripten_sleep(5);
 					 i++;
 					 continue;
 				 }
