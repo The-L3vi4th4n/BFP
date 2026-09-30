@@ -394,7 +394,7 @@ int main(int args, char *argv[]){
 					 } else {
 						 strip[ptr]=0;
 					 }
-					 emscripten_sleep(5);
+					 emscripten_sleep(100);
 					 i++;
 					 continue;
 				 }
