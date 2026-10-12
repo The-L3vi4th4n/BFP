@@ -1,6 +1,6 @@
 # BFP [Brainfuck plus]
 ## [!WARNING¡] I can't guarantee that the interpreter's logic is perfect, so there could be bugs within. Also I might forget to update something after changing it [¡GNINRAW!]
-<p>A brainfuck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainfuck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops.</p>
+<p>A brainfuck inspired esolang which is designed to mess with your head (and for me to make a language which is complex enough to have a lot of features to make it worthy for making text based stories, but codeable enough for a beginner). The interpreter is programmed pretty poorly, which might affect performance but I have not tested that as that is not the purpose of it (which is to mess with the user's head). BFPH is also there just for the funny and it is meant to be unprogrammable(without a lot of time and effort on your hands). BFPL on the otherhand is BFP but it removes a lot of the extra features and leaves only the basic brainfuck features(moving on the strip, adding and substracting from the current location, printing out the value at the current location as a character and loops) with the added benefit of multiply which can only be accesed by loops. BFPE is BFP but it adds extra features because I wanted to but BFP is limited to symbols and I didn't want to make it more messy so I made a new version. That means any BFP program should also work as a BFPE program. Finally, BF and BFA are both brainfuck interpreters but BFA supports # as a debug tool and also should run faster than BF as it has a very simple and stupid but decent enough(for me) compression thing to make the program run faster and make more parts of it run linear.</p>
 <a href='https://www.brainfuck.org/'>link to brainfuck.org</a><br>
 <a href='https://aminet.net/package/dev/lang/brainfuck-2.lha'>the original interpreter(if I am not wrong)</a><br>
 <a href='https://esolangs.org/wiki/BFP'>another project with the same name</a><br>
@@ -33,7 +33,7 @@ clang -O3 -DDEFAULT_PROGRAM='"main.bfp"' -DDEFAULT_STRIP=10000 -DDEFAULT_PTR_MAX
 
 <p>The syntax for BFP is intended to be weird. You can only use symbols and numbers in the language.<br>
 For example printing 'Hello' in the languages will look something like:<br>
-bfp  -->  99999998+.9991+.6+..2+.%<br>
+bfp/bfpe  -->  99999998+.9991+.6+..2+.%<br>
 bfpl  -->  ++++++++++>^++++++++?8*.^++++?6*+.^+?6*..+++.<.<br>
 bfph   -->   unknown(it's syntax is confusing on purpose)<br>
 The list goes as follows:</p>
