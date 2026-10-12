@@ -169,6 +169,9 @@ int main(int args, char *argv[]) {
 	while (i < length) {
 		if (data[i] == '<') {
 			ptr=(ptr-multiply)%size;
+			if (ptr<0){
+				ptr=size-abs(ptr);
+			}
 		} else if (data[i] == '>') {
 			ptr=(ptr+multiply)%size;
 		} else if (data[i] == '+') {

@@ -194,6 +194,9 @@ int main(int args, char *argv[]) {
 		data[i] = (to_base(data[i],i,multiply,strip) + strip[ptr]) % 255 + rot;
 		if (data[i] == ('<' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			ptr=(ptr-multiply)%size;
+			if (ptr<0) {
+				ptr=size-abs(ptr);
+			}	
 		} else if (data[i] == ('>' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
 			ptr=(ptr+multiply)%size;
 		} else if (data[i] == ('+' - ((unsigned char)(i) ^ rot) + (unsigned char)(multiply))) {
