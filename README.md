@@ -256,6 +256,7 @@ Random stuff I made and wanted to put here:<br>
 <p>I am dead :O  -->  Clears the screen before printing ÿ and exiting in BFPH, and also that it takes up to around 2 ms on my device with hyperfine checking. I have no clue how this works and if it will work with future updates(especially to eventually fix the brackets, if I ever actually do it)</p>
 <p>Cicada  -->  If you have seen the massive cicada program for BFP you might have realised I am a Good Kid fan and so I tried to test Cicada in BFPH because I just realised I could. It does literally nothing for a couple of seconds and exits. That's it. Pretty underwhelming but cool considering I barely found this type of program in BFPH before, mostly because I don't really spend much time in BFPH</p>
 <p>+[[-].+]  -->  I made this not knowing what I was expecting(it litterally prints a null character repeatedly in brainfuck). In bf.c, this works like (58.) or nevermore does in BFPH. In bfph it does nothing and exits. It's pretty useless.</p>
+<p>t+^,%>1't+,%>1'((</|+\1-)+(<</|+\1-)-)+,%_<<1@!*  -->  A simple clock using BFPE</p>
 
 # End
 Thanks for visiting, I hope you tried and enjoyed my esolanguages. I will try and add shout-outs to cool projects down here, but I might forget, not have time, not notice them or not be alive.
