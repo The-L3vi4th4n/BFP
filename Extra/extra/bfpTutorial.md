@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <h1> A very simple brainfuck tutorial </h1>
 <p>a supper simple brainfuck tutorial. Please note I am in no shape or form one of the best brainfuck programmers out there, so beware the quality of the content in this file. Also some stuff are implementation dependent, so they might not run everywhere but most brainfuck tools should be able to support them.</p>
 <hr>
@@ -26,6 +28,7 @@
 <p>clear data  :  [-] and [+] clear the current cell(however it should be noted that [+] might not work in some brainfuck versions, but that's an implementation specific problem) and set them to 0. It is rather usefull in brainfuck.</p>
 <p>transfer data  :  [->+<] is a simple example where the data is transfered to the next cell by repeatedly adding to the next cell while the data in the cell being transfered is not 0. Another example is [->+>+<<]>>[-<<+>>] which does the same thing as the previous one but ensures the original value stays the same in the cell being transfered by transfering the data back through making an extra clone of the data. This requires 3 free cells to do. There are too many variations to list so it's best to play about and learn them,</p>
 <p>add/substract 2 numbers  :  the transfer system does exactly that, for example +++>++++++<[->+<] adds 3 to 6 while +++>++++++<[->-<] substracts 3 from 6. If a number goes below 0 or above 255, it overflows and has different output based on ther brainfuck implenetation(should usually be an overflow with no errors)</p>
+<p>Simple multiplication  :  the transfer system can also be used to make simple multiplication like [->++<] multiples a number by 2. You can also [->[->+>+<<]>>[-<<+>>]<<<] to multiply like [x][y][x*y] (if I am not wrong). I wouldn't relly on this at all however as it limits the value from 0 - 255 max and will overflow.</p>
 <p>Check if a cell is 0  :  [->+>+<<]>>[-<<+>>]+<[>-<[-]] checks if the current cell is 0 by turning a neighbouring cell into 0 if it isn't and 1 if it is. >+<[>-<[-]] can also work if you won't need the data being checked again and needs 1 cell less to use than the other version, which makes it faster overall but at the coat that the thing isn't stored.</p>
 <p></p>
 <hr>
