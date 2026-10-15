@@ -31,14 +31,14 @@
       <hr>
       <p class="warning"><i>(note: compiling can be way simpler but this turns it into an executable so it's easier to run as you only have to type ./name rather than ./ver name.bfp STRIP_SIZE MAX_PTR output.bin every time you run the code but ver is bfpl/bfp/bfph. If you do it that way you have to precompile ver for example bfp would need to first go through compiler -O3 bfp.c -o bfp like clang bfp.c -o bfp)</i></p><br>
       <p>compiler -O3 -DDEFAULT_PROGRAM='"name.bfp"' -DDEFAULT_STRIP=strip_size -DDEFAULT_PTR_MAX=max_ptr -DDEFAULT_OUTPUT='"output.bin"' ver -o name</p><br>
-      <p clasis="warning">the lines in bold are optional and the output file is not an option with BFPL to make it smaller and the only reason it exists is so you can do stuff like use another program to access the data and, for example, draw it on a screen using a graphics library(sadly memory doesn't work that way :( ).</p>
+      <p class="warning">the lines in bold are optional and the output file is not an option with BFPL to make it smaller and the only reason it exists is so you can do stuff like use another program to access the data and, for example, draw it on a screen using a graphics library(sadly memory doesn't work that way :( ).</p>
       <p class="left">replace:</p><br>
       <ul class="left">
         <li>compiler: the name of your compiler</li>
         <li><b>"name.bfp": the name of your program file in double quotes</b></li>
         <li><b>strip_size: the size you want the strip to be</b></li>
         <li><b>max_ptr: the maximum amount of pointers you would like</b></li>
-        <li><b>"output.bin": with the file file you want the program to store the location of strip[0] in, doesn't do anything yet as it's a bit too complicated for me</b></li>
+        <li><b>"output.bin": with the file you want the program to store the location of strip[0] in, doesn't do anything yet as it's a bit too complicated for me</b></li>
         <li><b>ver with bfp.c/bfpl.c/bfph.c</b></li>
         <li>name: the name of your program file</li>
       </ul>
@@ -46,7 +46,7 @@
       <h1>2 : Syntax</h1>
       <hr>
       <div class="warning">
-        <h2>The syntax for BFP is intended to be weird. You can only use symbols and numbers in the language.<br>For example printing 'hello' in the languages will look like:<br>bfp  -->  99999998+.9991+.6+..2+.%<br>bfpl  -->  ++++++++++>^++++++++?8*.^++++?6*+.^+?6*..+++.<.<br>bfph  -->  unknown(it's syntax is confusing on purpose)</p><br>
+        <h2>The syntax for BFP is intended to be weird. You can only use symbols and numbers in the language.<br>For example printing 'hello' in the languages will look like:<br>bfp  -->  99999998+.9991+.6+..2+.%<br>bfpl  -->  ++++++++++>^++++++++?8*.^++++?6*+.^+?6*..+++.<.<br>bfph  -->  unknown(it's syntax is confusing on purpose)</h2><br>
       </div>
       <h2>The Syntax for BFP:</h2>
       <hr>
