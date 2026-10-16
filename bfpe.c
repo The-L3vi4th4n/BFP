@@ -485,6 +485,13 @@ int *sbracket(int *strip, int location, int multiply, int length, char data[],in
 		}
 		if (data[location] >= '0' && data[location] <= '9') {
 			mult += data[location] - '0';
+		} else if (data[i] == 't'){
+			multiply = time(NULL);
+		} else if (data[i] == 'i'){
+			multiply = location;
+		} else if (data[i] == 'p'){
+			multiply = ptr;
+
 		} else {
 			mult = 1;
 			mult += nl_multiply;
@@ -576,6 +583,13 @@ int *rbracket(int *strip, int location, int multiply, int length, char data[],in
 		}
 		if (data[location] >= '0' && data[location] <= '9') {
 			mult += data[location] - '0';
+		} else if (data[i] == 't'){
+			multiply = time(NULL);
+		} else if (data[i] == 'i'){
+			multiply = location;
+		} else if (data[i] == 'p'){
+			multiply = ptr;
+
 		} else {
 			mult = 1;
 			mult += nl_multiply;
