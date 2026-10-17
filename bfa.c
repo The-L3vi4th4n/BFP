@@ -122,7 +122,7 @@ int main(int args, char *argv[]){
 	i = 0;
 
 	while (i < length){
-		int tpe = data[i]=='#' || (data[i]=='+' || data[i]=='-' || data[i]=='>' || data[i]=='<' || data[i]=='[' || data[i]==']' || data[i]=='.' || data[i]==',') ? 1 : 0;
+		int tpe = (data[i]=='%' || data[i]=='+' || data[i]=='-' || data[i]=='>' || data[i]=='<' || data[i]=='[' || data[i]==']' || data[i]=='.' || data[i]==',') ? 1 : 0;
 		if (tpe) {
 			data[ln] = data[i];
 			table[ln] = table[i];
@@ -425,7 +425,7 @@ int main(int args, char *argv[]){
 					 i++;
 					 continue;
 				 }
-			case '#':
+			case '%':
 				{
 					printf("reached a # at point %d\n", i);
 					i++;
