@@ -70,9 +70,9 @@ unsigned int arc4random_uniform(unsigned int x) {
 int BASE_STRIP = DEFAULT_STRIP;
 int PTR_MAX = DEFAULT_PTR_MAX;
 
-int rot = 1;
-int its = 1;
-int dir = 1;
+unsigned int rot = 1;
+unsigned int its = 1;
+unsigned int dir = 1;
 int digit;
 
 int *rbracket(int *strip, int location, int multiply, int length, char data[], int ptr);
