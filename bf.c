@@ -62,7 +62,7 @@ int main(int args, char *argv[]){
 
 	int ptr = 0;
 	unsigned int i = 0;
-	char input = '\0';
+	int input = '\0';
 
 	while(i < length){
 		int loc = 1;

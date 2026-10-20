@@ -301,7 +301,7 @@ int main(int args, char *argv[]){
 
 	int ptr = 0;
 	i = 0;
-	char input = '\0';
+	int input = '\0';
 	int multiply = 0;
 	int flsh = 0;
 
