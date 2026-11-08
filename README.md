@@ -4,7 +4,7 @@
 <a href='https://www.brainfuck.org/'>link to brainfuck.org</a><br>
 <a href='https://aminet.net/package/dev/lang/brainfuck-2.lha'>the original interpreter(if I am not wrong)</a><br>
 <a href='https://esolangs.org/wiki/BFP'>another project with the same name</a><br>
-<a href="bfp.html">bfa.c (enter your program as a single line)</a>
+<a href="bfp.html">bfa.c (enter your program as a single line)</a><br>
 <a href="https://github.com/cwfitzgerald/brainfuck-benchmark">tests</a>
 
 # 1 : Compiling to an application like thing
