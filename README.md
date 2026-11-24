@@ -76,8 +76,8 @@ They wraps around if the number is less than 0 or greater than the specified siz
 
 
 ## 3) - and +
--  :  subtracts the value given by multiply from the current location<br>
-+  :  adds the value given by multiply to the current location<br>
+\-  :  subtracts the value given by multiply from the current location<br>
+\+  :  adds the value given by multiply to the current location<br>
 
 e.g.<br>
 9+  -->  the value at the current location on the strip increases by 10<br>
